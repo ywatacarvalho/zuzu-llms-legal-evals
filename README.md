@@ -10,6 +10,21 @@ The RRD paper source is `documents/Rubric Paper.pdf`. Frank source materials liv
 
 ---
 
+## Project Authors
+
+Authors are listed alphabetically by last name.
+
+| Name | Affiliation |
+|---|---|
+| Ana Carvalho | Northwestern University Law |
+| Qianyu Chen | Northwestern University |
+| Clark Hanlon | Northwestern University |
+| David Liu | Northwestern University |
+| Zahid Syed | Northwestern University |
+| Alan Tai | Northwestern University |
+
+---
+
 ## 1. Introduction and Scope
 
 LexEval is an LLM legal reasoning evaluation research platform. It evaluates legal-answer quality by separating source-grounded benchmark construction from downstream model comparison.
@@ -1061,21 +1076,6 @@ This README intentionally omits all real credential values, usernames, passwords
 - Keep theme values in CSS variables and the frontend theme config.
 - Add or update tests for new features and bug fixes.
 - Keep comparison-pool models separate from setup, control, and judge models.
-
----
-
-## Project Authors
-
-Authors are listed alphabetically by last name.
-
-| Name | Affiliation |
-|---|---|
-| Ana Carvalho | Northwestern University Law |
-| Qianyu Chen | Northwestern University |
-| Clark Hanlon | Northwestern University |
-| David Liu | Northwestern University |
-| Zahid Syed | Northwestern University |
-| Alan Tai | Northwestern University |
 
 ---
 
