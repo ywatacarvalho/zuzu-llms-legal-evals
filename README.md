@@ -1064,6 +1064,21 @@ This README intentionally omits all real credential values, usernames, passwords
 
 ---
 
+## Project Authors
+
+Authors are listed alphabetically by last name.
+
+| Name | Affiliation |
+|---|---|
+| Ana Carvalho | Northwestern University Law |
+| Qianyu Chen | Northwestern University |
+| Clark Hanlon | Northwestern University |
+| David Liu | Northwestern University |
+| Zahid Syed | Northwestern University |
+| Alan Tai | Northwestern University |
+
+---
+
 ## Benchmark Cases
 
 | File | Regression focus |
