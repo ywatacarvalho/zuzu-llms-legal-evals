@@ -234,13 +234,16 @@
   },
   "description": {
     "title": "Methodology",
-    "subtitle": "How LexEval evaluates LLM legal reasoning, step by step",
-    "intro": "LexEval is an LLM legal reasoning evaluation platform. It uses a structured, two-layer pipeline aligned with the RRD (Recursive Rubric Decomposition) methodology to measure how well large language models perform on legal reasoning tasks.",
-    "twoLayers": "The pipeline is divided into two layers that run in strict sequence:",
+    "subtitle": "How LexEval builds source-grounded rubrics and compares models",
+    "intro": "LexEval evaluates legal-answer quality by separating source-grounded benchmark construction from downstream model comparison.",
+    "twoLayers": "The current implementation combines three connected layers:",
+    "layerFrank": "Frank and Controller-Card Workflow",
+    "layerFrankDesc": "Source intake, structured extraction, six-pack routing, gold answer generation, locked controller-card creation, human review, and optional variation selection.",
     "layerCore": "RRD Core Workflow",
-    "layerCoreDesc": "Response-conditioned rubric proposal, recursive decompose-filter loop, frozen rubric, and baseline evaluation. This layer must complete before the downstream layer begins.",
-    "layerDownstream": "LexEval Downstream Workflow",
-    "layerDownstreamDesc": "Embedding, clustering, centroid judging, and model ranking. This layer consumes the frozen rubric produced by the RRD core workflow.",
+    "layerCoreDesc": "Setup responses, fixed-k conditioning centroids, response-conditioned proposal, recursive decompose-filter refinement, final weighting, and optional variation-rubric generation.",
+    "layerDownstream": "Dasha Downstream Workflow",
+    "layerDownstreamDesc": "Comparison responses, adaptive clustering, centroid scoring, overlays, citation verification, judge panels, dual-track analysis, and final ranking.",
+    "pipelineNote": "Clustering and scoring happen only after the rubric is frozen. Internal setup and judge models remain separated from the user-facing comparison pool.",
     "authors": {
       "title": "Project Authors",
       "note": "Authors are listed alphabetically by last name.",
@@ -274,15 +277,17 @@
       }
     },
     "stageNav": {
-      "core": "RRD Core",
-      "downstream": "LexEval Downstream",
+      "frank": "Frank",
+      "rrd": "RRD Core",
+      "dasha": "Dasha Downstream",
       "stage": "Stage",
       "goTo": "Go to stage"
     },
     "modelRegistry": {
       "title": "Implemented Model Registry",
-      "p1": "These are the model roles implemented by the application. Internal rubric and judge models are separated from the user-facing comparison pool.",
-      "internal": "Internal rubric and judge models",
+      "p1": "These are the model roles implemented by the application. Internal setup, reference, and judge models are kept separate from the user-facing comparison pool.",
+      "p2": "The same internal model family powers setup responses, refinement, and optional judge panels, while the comparison pool is loaded live from the backend allowlist.",
+      "internal": "Internal setup and judge models",
       "comparison": "User-facing comparison pool",
       "comparisonNote": "The comparison pool is loaded from /api/v1/evaluations/models so this page reflects the implemented backend allowlist.",
       "error": "Could not load the comparison model pool.",
@@ -292,10 +297,10 @@
       "role": "Role",
       "style": "Style",
       "roles": {
-        "controlSetup": "Control model and setup model",
-        "strongSetup": "Strong reference and setup model",
-        "weakSetup": "Weak reference and setup model",
-        "setup": "Setup model"
+        "controlSetup": "Control, setup, and default judge",
+        "strongSetup": "Strong reference, setup, and judge",
+        "weakSetup": "Weak reference, setup, and judge",
+        "setup": "Setup and judge"
       },
       "styles": {
         "instruction": "Instruction-following",
@@ -303,77 +308,91 @@
       }
     },
     "stage1": {
-      "title": "Stage 1 -- Case Ingestion",
-      "p1": "The user uploads a legal case as a PDF document. The system extracts the full text using pdfplumber and stores it alongside a legal question as the task definition.",
-      "p2": "This text and question form the input for the entire downstream pipeline."
+      "title": "Stage 1 -- Legal Case Ingestion",
+      "p1": "The user uploads a legal case PDF. The backend extracts full text with pdfplumber and stores it together with the user's legal question.",
+      "p2": "If no case text is provided, the system skips Frank and runs the question-only RRD path."
     },
     "stage2": {
-      "title": "Stage 2 -- Setup Response Generation",
-      "p1": "Four setup models each generate 25 responses to the legal question, producing 100 candidate responses total. All calls run concurrently under a semaphore.",
-      "p2": "Simultaneously, a reference pair is generated: one strong response and one weak response. This pair is used later for misalignment filtering during rubric refinement.",
-      "models": "Setup Models",
-      "modelNote": "These models are excluded from the comparison pool to prevent any model from influencing the rubric it will later be evaluated against."
+      "title": "Stage 2 -- Frank Grounding, Review, and Variation Gate",
+      "p1": "When source text is available, Frank runs before RRD. It screens the source, extracts doctrine, routes to a B-series pack, and generates the benchmark materials used downstream.",
+      "p2": "The pipeline pauses for human review before rubric construction continues. Approval can advance directly to the base question or into the variation workflow.",
+      "screening": "Source Screening and Extraction",
+      "screeningDesc": "Frank records a 17-item intake screen, an 18-key source extraction, canonical source case name and citation fields, and a question-analysis check.",
+      "routing": "Routing and Gold Packet",
+      "routingDesc": "The extracted source is routed to one of six packs: marriage, suretyship, one-year, land, UCC 2-201, or executor. Frank then builds a gold packet mapping and predicted failure modes.",
+      "controller": "Gold Answer and Controller Card",
+      "controllerDesc": "Frank generates a weak reference answer, a clean benchmark gold answer, and a locked 36-field controller card that fixes pack identity, base-question metadata, and citation-verification mode.",
+      "review": "Human Review and Lane Selection",
+      "reviewDesc": "Reviewers can approve, reject, or reroute. Approved rubrics move to `variation_pending`, where the reviewer can skip variation, request a variation menu, or select a lane-coded variation for dual-rubric mode."
     },
     "stage3": {
-      "title": "Stage 3 -- Clustering to Conditioning Sample",
-      "p1": "The 100 setup responses are embedded with sentence-transformers (all-mpnet-base-v2) and clustered using k-means with k fixed at 8.",
-      "p2": "The centroid response per cluster -- the response with the highest cosine similarity to the cluster centroid vector -- is selected. These 8 centroid texts form the conditioning sample passed to the rubric proposal step.",
-      "deviation": "LexEval deviation from the RRD paper: the paper uses 8 randomly sampled responses as the conditioning set. LexEval instead generates 100 diverse responses and clusters them to 8 representative centroids, ensuring full coverage of the response space."
+      "title": "Stage 3 -- RRD Setup Response Generation",
+      "p1": "After Frank review completes, or immediately on the question-only path, four internal setup models generate 25 responses each for a total of 100 setup responses.",
+      "p2": "The Frank gold answer becomes the strong reference on the Frank path. On the question-only path, the strong and weak reference pair comes from the internal setup roster.",
+      "modelNote": "These models are excluded from the comparison pool so they cannot influence a rubric they will later be evaluated against."
     },
     "stage4": {
-      "title": "Stage 4 -- Initial Rubric Proposal",
-      "p1": "The control model proposes an initial rubric conditioned on the legal question and the 8 centroid conditioning responses. The proposal uses low temperature (0.2) and requires JSON output matching the criterion schema.",
-      "p2": "Rubric criteria should be informative, comprehensive, and non-redundant. The number of criteria emerges from task complexity; no fixed target count is imposed."
+      "title": "Stage 4 -- Fixed-k Conditioning Sample",
+      "p1": "The 100 setup responses are embedded with all-mpnet-base-v2 and clustered with fixed k = 8.",
+      "p2": "The response with highest cosine similarity to each cluster centroid becomes a conditioning example for the initial rubric proposal.",
+      "deviation": "LexEval deviates from the RRD paper here: instead of sampling 8 responses randomly, it clusters 100 setup responses and uses 8 representative centroids."
     },
     "stage5": {
-      "title": "Stage 5 -- Recursive Decompose-Filter Loop",
-      "p1": "This is the central methodological component. The loop iterates over depth-0 criteria (initial proposals) and applies decomposition and filtering until a stopping condition is met.",
-      "decomposition": "Decomposition Trigger",
-      "decompositionDesc": "A criterion is evaluated against all 8 centroid texts using binary pass/fail scoring. If it passes more than 2 of the 8 centroids, it is too broad and is decomposed into 2-3 narrower subcriteria.",
-      "misalignment": "Misalignment Filtering",
-      "misalignmentDesc": "Each proposed child criterion is evaluated against the strong and weak reference responses. A criterion is discarded only when it passes the weak reference but fails the strong one, indicating an inverted preference direction.",
-      "redundancy": "Redundancy Filtering",
-      "redundancyDesc": "Each proposed child criterion that passes misalignment filtering is checked against already-accepted criteria. If the control model judges it redundant, it is discarded.",
-      "stopping": "Stopping Rule",
-      "stoppingDesc": "The loop terminates when accumulated discarded proposals reach the rejection threshold, when no broad criteria remain (convergence), or at a hard cap of 20 passes."
+      "title": "Stage 5 -- Response-Conditioned Initial Rubric Proposal",
+      "p1": "The control model proposes an initial rubric conditioned on the legal question, the 8 centroid responses, and doctrine-pack context when available.",
+      "p2": "Each criterion is normalized into the implemented schema with id, name, description, weight, and module_id when module structure is present."
     },
     "stage6": {
-      "title": "Stage 6 -- Whitened-Uniform Weight Assignment",
-      "p1": "After the refinement loop, final criterion weights are computed using whitened-uniform (WU) weighting from the RRD paper.",
-      "p2": "Each centroid is scored against each criterion using binary evaluation, producing a score matrix. The rubric covariance is estimated, and the whitened-uniform weight vector is derived via eigendecomposition. This ensures that correlated rubric dimensions do not dominate the aggregate score."
+      "title": "Stage 6 -- Recursive Decompose-Filter Loop",
+      "p1": "This is the core RRD refinement stage. Broad criteria are decomposed, then filtered for misalignment and redundancy until the loop converges or hits a stopping condition.",
+      "decomposition": "Breadth Trigger",
+      "decompositionDesc": "A criterion is considered too broad when it passes more than 2 of the 8 centroid texts. It is then decomposed into narrower child criteria, with only one decomposition depth allowed.",
+      "misalignment": "Misalignment Filter",
+      "misalignmentDesc": "A child criterion is rejected only when it passes the weak reference and fails the strong reference. On the Frank path, the strong reference is the approved Frank gold answer.",
+      "redundancy": "Redundancy Filter",
+      "redundancyDesc": "Each surviving child criterion is checked against already accepted criteria and removed if the control model judges it redundant.",
+      "stopping": "Stopping Rule",
+      "stoppingDesc": "The implemented loop stops when rejected proposals reach 5, when no broad criteria remain, or when the hard cap of 20 passes is reached."
     },
     "stage7": {
-      "title": "Stage 7 -- Comparison Response Generation",
-      "p1": "The user selects between 2 and 5 models from the comparison pool. Each model generates 40 responses to the legal question. The total number of responses varies with the number of models selected. Response generation runs asynchronously under a concurrency semaphore.",
-      "exclusion": "Exclusion Rule",
-      "exclusionDesc": "A model is excluded from the comparison pool if it participates in rubric assembly (setup response generation or the proposal/refinement loop) or in final judging (centroid scoring)."
+      "title": "Stage 7 -- Final Weighting, Karthic Enrichment, and Variation Rubric",
+      "p1": "After refinement, LexEval computes whitened-uniform criterion weights and blends module priors when module structure is present.",
+      "p2": "The rubric can then be enriched with Karthic row-card fields. If a reviewer selected a lane and enabled dual-rubric mode, the system can also generate a separate variation rubric.",
+      "karthic": "Karthic Enrichment",
+      "karthicDesc": "Row-card enrichment adds fields such as row codes, NA guidance, golden-target summaries, omissions, contradiction flags, scoring anchors, and primary failure labels, followed by an overlap audit.",
+      "variation": "Variation Workflow",
+      "variationDesc": "Approved rubrics can persist selected_lane_code, variation_question, and variation_criteria. The base rubric remains in criteria, while the variation rubric is stored separately."
     },
     "stage8": {
-      "title": "Stage 8 -- Embedding and Clustering",
-      "p1": "All comparison responses are embedded with sentence-transformers. The optimal cluster count k is selected data-adaptively via silhouette score maximization, sweeping from max(floor(n_models * 1.5), 4).",
-      "p2": "K-means is applied at the selected k, and the centroid response per cluster (highest cosine similarity to the centroid vector) is identified for scoring."
+      "title": "Stage 8 -- Comparison Response Generation",
+      "p1": "The user selects 2 to 5 models from the comparison pool. Each selected model generates 40 base responses, and dual-rubric runs also generate 40 variation responses per model.",
+      "p2": "Each stored response records question_version as either base or variation, allowing the analysis stage to separate the two tracks.",
+      "exclusion": "Model Separation",
+      "exclusionDesc": "A model is excluded from the comparison pool if it participates in setup, rubric construction, or judging."
     },
     "stage9": {
-      "title": "Stage 9 -- Centroid Scoring",
-      "p1": "The control model scores each centroid response against the frozen rubric criteria. Scores are collected per criterion (0.0-1.0) and the weighted total is computed.",
-      "p2": "Results are reported under three weighting modes in parallel:",
+      "title": "Stage 9 -- Dasha Analysis: Clustering, Scoring, and Panels",
+      "p1": "Base responses are embedded and clustered with adaptive silhouette-score selection. Centroids are then scored against the frozen rubric and stored with heuristic, uniform, and whitened-uniform views.",
+      "p2": "For Frank-enhanced rubrics, the analysis layer also produces failure tags, metadata tags, centroid composition, Dasha overlays, citation verification, and optional judge-panel outputs.",
+      "weightsLabel": "Weighting Views",
       "uniform": "Uniform: equal weight per criterion",
-      "heuristic": "Heuristic: RRD-assigned WU weights from Stage 6",
-      "whitened": "Whitened Uniform: column-wise z-score normalization across clusters, then uniform average",
-      "resultsLabel": "How this appears in Results",
-      "resultsDesc": "The Results page shows the primary ranking and the weighting comparison side by side.",
-      "primary": "Heuristic mode is the primary ranking mode used for the winning cluster and top model.",
-      "sensitivity": "Uniform and whitened_uniform are reported as sensitivity checks rather than replacement rankings.",
-      "disagreement": "If weighting modes disagree, the case should be treated as a rubric-sensitivity signal, not as a pipeline error."
+      "heuristic": "Heuristic: RRD-assigned or blended weights from the frozen rubric",
+      "whitened": "Whitened Uniform: normalized comparison view across clusters",
+      "tagsLabel": "Tags and Overlays",
+      "tagsDesc": "The analysis layer can add Module 0 metadata, failure tags, centroid composition blocks, penalties, caps, final scores, and case-citation verification metadata.",
+      "dualTrackLabel": "Dual-Track Analysis",
+      "dualTrackDesc": "When dual_rubric_mode is active, base and variation responses are loaded separately by question_version. If variation responses are missing, the system falls back to rescoring base centroids against the variation rubric.",
+      "judgePanelLabel": "Judge Panels and Zak Escalation",
+      "judgePanelDesc": "Optional internal judge models can vote on centroid rankings. When no strict majority is reached, the system records judge votes and raises a zak_review_flag."
     },
     "stage10": {
       "title": "Stage 10 -- Ranking",
-      "p1": "The cluster with the highest aggregate rubric score (under heuristic mode) is the winning cluster. Model share within the winning cluster is computed as the fraction of responses from each model.",
-      "p2": "The model with the highest share in the winning cluster is ranked first."
+      "p1": "The primary ranking rule remains unchanged: identify the winning cluster under the heuristic track and rank models by their share inside that cluster.",
+      "p2": "Dasha final scores, penalties, caps, and dual-track outputs are reported in parallel, but they do not replace the winning-cluster ranking rule."
     },
     "controlModel": {
       "title": "Control Model",
-      "p1": "deepseek-ai/DeepSeek-V3 serves as the control model for rubric assembly and final judging. This is a LexEval platform choice, not a paper requirement."
+      "p1": "deepseek-ai/DeepSeek-V3 serves as the control model for proposal, refinement, centroid scoring, and the default single-judge path when a judge panel is not supplied."
     }
   },
   "controllerCard": {

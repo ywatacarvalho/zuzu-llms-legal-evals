@@ -1,6 +1,5 @@
 import {
   ArrowRight,
-  Binary,
   BookOpen,
   Database,
   FileSearch,
@@ -28,11 +27,16 @@ interface StageCardProps {
   icon: React.ReactNode;
   title: string;
   children: React.ReactNode;
-  accent?: "primary" | "secondary";
+  accent?: "frank" | "rrd" | "dasha";
 }
 
-function StageCard({ id, icon, title, children, accent = "primary" }: StageCardProps) {
-  const border = accent === "primary" ? "border-l-primary" : "border-l-muted-foreground/30";
+function StageCard({ id, icon, title, children, accent = "rrd" }: StageCardProps) {
+  const border =
+    accent === "frank"
+      ? "border-l-primary"
+      : accent === "rrd"
+        ? "border-l-foreground/30"
+        : "border-l-muted-foreground/30";
   return (
     <Card id={id} className={`scroll-mt-24 border-l-4 ${border}`}>
       <CardHeader className="pb-3">
@@ -46,23 +50,42 @@ function StageCard({ id, icon, title, children, accent = "primary" }: StageCardP
   );
 }
 
+type StageLayer = "frank" | "rrd" | "dasha";
+
 const STAGES = [
-  { id: "stage-1", number: 1, titleKey: "description.stage1.title", layer: "core" },
-  { id: "stage-2", number: 2, titleKey: "description.stage2.title", layer: "core" },
-  { id: "stage-3", number: 3, titleKey: "description.stage3.title", layer: "core" },
-  { id: "stage-4", number: 4, titleKey: "description.stage4.title", layer: "core" },
-  { id: "stage-5", number: 5, titleKey: "description.stage5.title", layer: "core" },
-  { id: "stage-6", number: 6, titleKey: "description.stage6.title", layer: "core" },
-  { id: "stage-7", number: 7, titleKey: "description.stage7.title", layer: "downstream" },
-  { id: "stage-8", number: 8, titleKey: "description.stage8.title", layer: "downstream" },
-  { id: "stage-9", number: 9, titleKey: "description.stage9.title", layer: "downstream" },
-  { id: "stage-10", number: 10, titleKey: "description.stage10.title", layer: "downstream" },
+  { id: "stage-1", number: 1, titleKey: "description.stage1.title", layer: "frank" as StageLayer },
+  { id: "stage-2", number: 2, titleKey: "description.stage2.title", layer: "frank" as StageLayer },
+  { id: "stage-3", number: 3, titleKey: "description.stage3.title", layer: "rrd" as StageLayer },
+  { id: "stage-4", number: 4, titleKey: "description.stage4.title", layer: "rrd" as StageLayer },
+  { id: "stage-5", number: 5, titleKey: "description.stage5.title", layer: "rrd" as StageLayer },
+  { id: "stage-6", number: 6, titleKey: "description.stage6.title", layer: "rrd" as StageLayer },
+  { id: "stage-7", number: 7, titleKey: "description.stage7.title", layer: "rrd" as StageLayer },
+  { id: "stage-8", number: 8, titleKey: "description.stage8.title", layer: "dasha" as StageLayer },
+  { id: "stage-9", number: 9, titleKey: "description.stage9.title", layer: "dasha" as StageLayer },
+  {
+    id: "stage-10",
+    number: 10,
+    titleKey: "description.stage10.title",
+    layer: "dasha" as StageLayer,
+  },
 ];
 
 const AUTHORS = ["carvalho", "chen", "hanlon", "liu", "syed", "tai"];
 
 function MethodologyNav() {
   const { t } = useTranslation();
+
+  const getStageClassName = (layer: StageLayer) => {
+    if (layer === "frank") {
+      return "border-primary/30 bg-primary/5 text-primary";
+    }
+
+    if (layer === "rrd") {
+      return "border-border bg-muted/40 text-foreground";
+    }
+
+    return "border-muted-foreground/30 bg-background text-muted-foreground";
+  };
 
   const scrollToStage = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -71,9 +94,11 @@ function MethodologyNav() {
   return (
     <div className="sticky top-0 z-10 rounded-md border border-border bg-background/95 p-3 shadow-sm backdrop-blur">
       <div className="mb-2 flex flex-wrap gap-2 text-[10px] font-semibold uppercase text-muted-foreground">
-        <span>{t("description.stageNav.core")}</span>
+        <span>{t("description.stageNav.frank")}</span>
         <span className="text-muted-foreground/40">/</span>
-        <span>{t("description.stageNav.downstream")}</span>
+        <span>{t("description.stageNav.rrd")}</span>
+        <span className="text-muted-foreground/40">/</span>
+        <span>{t("description.stageNav.dasha")}</span>
       </div>
       <div className="flex flex-wrap items-center gap-1.5">
         {STAGES.map((stage) => (
@@ -81,11 +106,9 @@ function MethodologyNav() {
             key={stage.id}
             type="button"
             onClick={() => scrollToStage(stage.id)}
-            className={`rounded-md border px-2 py-1 text-xs font-medium transition-colors hover:border-primary hover:text-primary ${
-              stage.layer === "core"
-                ? "border-primary/30 bg-primary/5 text-primary"
-                : "border-border bg-muted/40 text-foreground"
-            }`}
+            className={`rounded-md border px-2 py-1 text-xs font-medium transition-colors hover:border-primary hover:text-primary ${getStageClassName(
+              stage.layer
+            )}`}
             aria-label={`${t("description.stageNav.goTo")} ${stage.number}: ${t(stage.titleKey)}`}
           >
             {t("description.stageNav.stage")} {stage.number}
@@ -178,7 +201,7 @@ function SubSection({ label, children }: SubSectionProps) {
   return (
     <div className="rounded-md bg-muted/40 p-3">
       <p className="mb-1 text-xs font-semibold text-foreground">{label}</p>
-      <p>{children}</p>
+      <div>{children}</div>
     </div>
   );
 }
@@ -253,20 +276,27 @@ export function DescriptionPage() {
         <CardContent className="space-y-4 pt-6 text-sm text-muted-foreground">
           <p>{t("description.intro")}</p>
           <p>{t("description.twoLayers")}</p>
-          <div className="grid gap-3 sm:grid-cols-2">
+          <div className="grid gap-3 lg:grid-cols-3">
             <div className="rounded-md border border-primary/30 bg-primary/5 p-3">
               <p className="mb-1 text-xs font-semibold text-primary">
+                {t("description.layerFrank")}
+              </p>
+              <p className="text-xs">{t("description.layerFrankDesc")}</p>
+            </div>
+            <div className="rounded-md border border-primary/30 bg-primary/5 p-3">
+              <p className="mb-1 text-xs font-semibold text-foreground">
                 {t("description.layerCore")}
               </p>
               <p className="text-xs">{t("description.layerCoreDesc")}</p>
             </div>
             <div className="rounded-md border border-muted-foreground/30 bg-muted/40 p-3">
-              <p className="mb-1 text-xs font-semibold text-foreground">
+              <p className="mb-1 text-xs font-semibold text-muted-foreground">
                 {t("description.layerDownstream")}
               </p>
               <p className="text-xs">{t("description.layerDownstreamDesc")}</p>
             </div>
           </div>
+          <p>{t("description.pipelineNote")}</p>
         </CardContent>
       </Card>
 
@@ -280,6 +310,7 @@ export function DescriptionPage() {
         </CardHeader>
         <CardContent className="space-y-5 text-sm text-muted-foreground">
           <p>{t("description.modelRegistry.p1")}</p>
+          <p>{t("description.modelRegistry.p2")}</p>
           <div className="space-y-2">
             <p className="text-xs font-semibold text-foreground">
               {t("description.modelRegistry.internal")}
@@ -322,6 +353,7 @@ export function DescriptionPage() {
         id="stage-1"
         icon={<FileSearch className={iconCls} />}
         title={t("description.stage1.title")}
+        accent="frank"
       >
         <p>{t("description.stage1.p1")}</p>
         <p>{t("description.stage1.p2")}</p>
@@ -330,118 +362,141 @@ export function DescriptionPage() {
       {/* Stage 2 */}
       <StageCard
         id="stage-2"
-        icon={<MessageSquare className={iconCls} />}
+        icon={<BookOpen className={iconCls} />}
         title={t("description.stage2.title")}
+        accent="frank"
       >
         <p>{t("description.stage2.p1")}</p>
         <p>{t("description.stage2.p2")}</p>
-        <p className="text-xs font-semibold text-foreground">
-          {t("description.modelRegistry.internal")}
-        </p>
-        <InternalModelsTable />
-        <p className="text-xs italic">{t("description.stage2.modelNote")}</p>
+        <SubSection label={t("description.stage2.screening")}>
+          {t("description.stage2.screeningDesc")}
+        </SubSection>
+        <SubSection label={t("description.stage2.routing")}>
+          {t("description.stage2.routingDesc")}
+        </SubSection>
+        <SubSection label={t("description.stage2.controller")}>
+          {t("description.stage2.controllerDesc")}
+        </SubSection>
+        <SubSection label={t("description.stage2.review")}>
+          {t("description.stage2.reviewDesc")}
+        </SubSection>
       </StageCard>
 
       {/* Stage 3 */}
       <StageCard
         id="stage-3"
-        icon={<Network className={iconCls} />}
+        icon={<MessageSquare className={iconCls} />}
         title={t("description.stage3.title")}
       >
         <p>{t("description.stage3.p1")}</p>
         <p>{t("description.stage3.p2")}</p>
-        <div className="rounded-md border border-amber-500/30 bg-amber-500/5 p-3 text-xs italic">
-          {t("description.stage3.deviation")}
-        </div>
+        <p className="text-xs font-semibold text-foreground">
+          {t("description.modelRegistry.internal")}
+        </p>
+        <InternalModelsTable />
+        <p className="text-xs italic">{t("description.stage3.modelNote")}</p>
       </StageCard>
 
       {/* Stage 4 */}
       <StageCard
         id="stage-4"
-        icon={<BookOpen className={iconCls} />}
+        icon={<Network className={iconCls} />}
         title={t("description.stage4.title")}
       >
         <p>{t("description.stage4.p1")}</p>
         <p>{t("description.stage4.p2")}</p>
+        <div className="rounded-md border border-primary/20 bg-primary/5 p-3 text-xs italic">
+          {t("description.stage4.deviation")}
+        </div>
       </StageCard>
 
       {/* Stage 5 */}
       <StageCard
         id="stage-5"
-        icon={<Scissors className={iconCls} />}
+        icon={<BookOpen className={iconCls} />}
         title={t("description.stage5.title")}
       >
         <p>{t("description.stage5.p1")}</p>
-        <SubSection label={t("description.stage5.decomposition")}>
-          {t("description.stage5.decompositionDesc")}
-        </SubSection>
-        <SubSection label={t("description.stage5.misalignment")}>
-          {t("description.stage5.misalignmentDesc")}
-        </SubSection>
-        <SubSection label={t("description.stage5.redundancy")}>
-          {t("description.stage5.redundancyDesc")}
-        </SubSection>
-        <SubSection label={t("description.stage5.stopping")}>
-          {t("description.stage5.stoppingDesc")}
-        </SubSection>
+        <p>{t("description.stage5.p2")}</p>
       </StageCard>
 
       {/* Stage 6 */}
       <StageCard
         id="stage-6"
-        icon={<Weight className={iconCls} />}
+        icon={<Scissors className={iconCls} />}
         title={t("description.stage6.title")}
       >
         <p>{t("description.stage6.p1")}</p>
-        <p>{t("description.stage6.p2")}</p>
+        <SubSection label={t("description.stage6.decomposition")}>
+          {t("description.stage6.decompositionDesc")}
+        </SubSection>
+        <SubSection label={t("description.stage6.misalignment")}>
+          {t("description.stage6.misalignmentDesc")}
+        </SubSection>
+        <SubSection label={t("description.stage6.redundancy")}>
+          {t("description.stage6.redundancyDesc")}
+        </SubSection>
+        <SubSection label={t("description.stage6.stopping")}>
+          {t("description.stage6.stoppingDesc")}
+        </SubSection>
       </StageCard>
 
       {/* Stage 7 */}
       <StageCard
         id="stage-7"
-        icon={<Database className={iconCls} />}
+        icon={<Weight className={iconCls} />}
         title={t("description.stage7.title")}
-        accent="secondary"
       >
         <p>{t("description.stage7.p1")}</p>
-        <SubSection label={t("description.stage7.exclusion")}>
-          {t("description.stage7.exclusionDesc")}
+        <p>{t("description.stage7.p2")}</p>
+        <SubSection label={t("description.stage7.karthic")}>
+          {t("description.stage7.karthicDesc")}
+        </SubSection>
+        <SubSection label={t("description.stage7.variation")}>
+          {t("description.stage7.variationDesc")}
         </SubSection>
       </StageCard>
 
       {/* Stage 8 */}
       <StageCard
         id="stage-8"
-        icon={<Layers className={iconCls} />}
+        icon={<Database className={iconCls} />}
         title={t("description.stage8.title")}
-        accent="secondary"
+        accent="dasha"
       >
         <p>{t("description.stage8.p1")}</p>
         <p>{t("description.stage8.p2")}</p>
+        <SubSection label={t("description.stage8.exclusion")}>
+          {t("description.stage8.exclusionDesc")}
+        </SubSection>
       </StageCard>
 
       {/* Stage 9 */}
       <StageCard
         id="stage-9"
-        icon={<Binary className={iconCls} />}
+        icon={<Layers className={iconCls} />}
         title={t("description.stage9.title")}
-        accent="secondary"
+        accent="dasha"
       >
         <p>{t("description.stage9.p1")}</p>
         <p>{t("description.stage9.p2")}</p>
+        <p className="text-xs font-semibold text-foreground">
+          {t("description.stage9.weightsLabel")}
+        </p>
         <ul className="ml-4 list-disc space-y-1">
           <li>{t("description.stage9.uniform")}</li>
           <li>{t("description.stage9.heuristic")}</li>
           <li>{t("description.stage9.whitened")}</li>
         </ul>
-        <SubSection label={t("description.stage9.resultsLabel")}>
-          {t("description.stage9.resultsDesc")}
+        <SubSection label={t("description.stage9.tagsLabel")}>
+          {t("description.stage9.tagsDesc")}
         </SubSection>
-        <ul className="ml-4 list-disc space-y-1">
-          <li>{t("description.stage9.primary")}</li>
-          <li>{t("description.stage9.sensitivity")}</li>
-          <li>{t("description.stage9.disagreement")}</li>
-        </ul>
+        <SubSection label={t("description.stage9.dualTrackLabel")}>
+          {t("description.stage9.dualTrackDesc")}
+        </SubSection>
+        <SubSection label={t("description.stage9.judgePanelLabel")}>
+          {t("description.stage9.judgePanelDesc")}
+        </SubSection>
       </StageCard>
 
       {/* Stage 10 */}
@@ -449,7 +504,7 @@ export function DescriptionPage() {
         id="stage-10"
         icon={<Trophy className={iconCls} />}
         title={t("description.stage10.title")}
-        accent="secondary"
+        accent="dasha"
       >
         <p>{t("description.stage10.p1")}</p>
         <p>{t("description.stage10.p2")}</p>

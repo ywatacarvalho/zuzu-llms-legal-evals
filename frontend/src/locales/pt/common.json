@@ -233,18 +233,21 @@
   },
   "description": {
     "title": "Metodologia",
-    "subtitle": "Como o LexEval avalia o raciocínio jurídico de LLMs, passo a passo",
-    "intro": "O LexEval é uma plataforma de avaliação de raciocínio jurídico de LLMs. Utiliza um pipeline estruturado de duas camadas, alinhado com a metodologia RRD (Recursive Rubric Decomposition), para medir o desempenho de modelos de linguagem em tarefas de raciocínio jurídico.",
-    "twoLayers": "O pipeline é dividido em duas camadas que executam em sequência estrita:",
+    "subtitle": "Como o LexEval constrói rúbricas ancoradas em fontes e compara modelos",
+    "intro": "O LexEval avalia a qualidade de respostas jurídicas separando a construção de benchmark ancorado em fonte da comparação posterior entre modelos.",
+    "twoLayers": "A implementação atual combina três camadas conectadas:",
+    "layerFrank": "Fluxo Frank e Controller Card",
+    "layerFrankDesc": "Triagem da fonte, extração estruturada, roteamento em seis pacotes, geração de resposta ouro, criação de controller card bloqueado, revisão humana e seleção opcional de variação.",
     "layerCore": "Fluxo Central RRD",
-    "layerCoreDesc": "Proposta de rúbrica condicionada por respostas, ciclo recursivo de decomposição-filtragem, rúbrica congelada e avaliação de referência. Esta camada deve ser concluída antes do início da camada posterior.",
-    "layerDownstream": "Fluxo Posterior LexEval",
-    "layerDownstreamDesc": "Incorporação, agrupamento, julgamento de centróides e classificação de modelos. Esta camada consome a rúbrica congelada produzida pelo fluxo central RRD.",
+    "layerCoreDesc": "Respostas de preparação, centróides de condicionamento com k fixo, proposta condicionada por respostas, refinamento recursivo de decomposição e filtragem, ponderação final e geração opcional de rúbrica de variação.",
+    "layerDownstream": "Fluxo Posterior Dasha",
+    "layerDownstreamDesc": "Respostas de comparação, agrupamento adaptativo, pontuação de centróides, overlays, verificação de citação, painéis de juízes, análise em dois trilhos e classificação final.",
+    "pipelineNote": "Agrupamento e pontuação só acontecem depois de a rúbrica estar congelada. Modelos internos de preparação e julgamento continuam separados do grupo de comparação visível ao utilizador.",
     "authors": {
       "title": "Autores do Projeto",
-      "note": "Os autores estao listados alfabeticamente pelo ultimo sobrenome.",
+      "note": "Os autores estão listados alfabeticamente pelo sobrenome.",
       "name": "Nome",
-      "affiliation": "Instituicao",
+      "affiliation": "Afiliação",
       "people": {
         "carvalho": {
           "name": "Ana Carvalho",
@@ -273,17 +276,19 @@
       }
     },
     "stageNav": {
-      "core": "Núcleo RRD",
-      "downstream": "Fluxo Posterior LexEval",
+      "frank": "Frank",
+      "rrd": "Núcleo RRD",
+      "dasha": "Fluxo Dasha",
       "stage": "Etapa",
       "goTo": "Ir para etapa"
     },
     "modelRegistry": {
       "title": "Registro de Modelos Implementados",
-      "p1": "Estes são os papéis de modelo implementados pela aplicação. Modelos internos de rúbrica e julgamento ficam separados do grupo de comparação visível ao utilizador.",
-      "internal": "Modelos internos de rúbrica e julgamento",
+      "p1": "Estes são os papéis de modelo implementados pela aplicação. Modelos internos de preparação, referência e julgamento ficam separados do grupo de comparação visível ao utilizador.",
+      "p2": "A mesma família de modelos internos suporta respostas de preparação, refinamento e painéis opcionais de juízes, enquanto o grupo de comparação é carregado ao vivo da allowlist do backend.",
+      "internal": "Modelos internos de preparação e julgamento",
       "comparison": "Grupo de comparação visível ao utilizador",
-      "comparisonNote": "O grupo de comparação é carregado de /api/v1/evaluations/models para que esta página reflita a lista implementada no backend.",
+      "comparisonNote": "O grupo de comparação é carregado de /api/v1/evaluations/models para que esta página reflita a allowlist implementada no backend.",
       "error": "Não foi possível carregar o grupo de modelos de comparação.",
       "modelId": "ID do modelo",
       "name": "Nome",
@@ -291,10 +296,10 @@
       "role": "Papel",
       "style": "Estilo",
       "roles": {
-        "controlSetup": "Modelo de controlo e modelo de preparação",
-        "strongSetup": "Referência forte e modelo de preparação",
-        "weakSetup": "Referência fraca e modelo de preparação",
-        "setup": "Modelo de preparação"
+        "controlSetup": "Controlo, preparação e juiz padrão",
+        "strongSetup": "Referência forte, preparação e juiz",
+        "weakSetup": "Referência fraca, preparação e juiz",
+        "setup": "Preparação e juiz"
       },
       "styles": {
         "instruction": "Seguimento de instruções",
@@ -302,77 +307,91 @@
       }
     },
     "stage1": {
-      "title": "Etapa 1 -- Ingestão do Caso",
-      "p1": "O utilizador envia um caso jurídico como documento PDF. O sistema extrai o texto completo utilizando pdfplumber e armazena-o juntamente com uma pergunta jurídica como definição da tarefa.",
-      "p2": "Este texto e pergunta formam a entrada para todo o pipeline subsequente."
+      "title": "Etapa 1 -- Ingestão do Caso Jurídico",
+      "p1": "O utilizador envia um PDF de caso jurídico. O backend extrai o texto completo com pdfplumber e armazena-o juntamente com a pergunta jurídica do utilizador.",
+      "p2": "Se não houver texto de caso, o sistema ignora Frank e executa o caminho RRD baseado apenas na pergunta."
     },
     "stage2": {
-      "title": "Etapa 2 -- Geração de Respostas de Preparação",
-      "p1": "Quatro modelos de preparação geram cada um 25 respostas à pergunta jurídica, produzindo 100 respostas candidatas no total. Todas as chamadas executam concorrentemente sob um semáforo.",
-      "p2": "Simultaneamente, um par de referência é gerado: uma resposta forte e uma resposta fraca. Este par é utilizado posteriormente para filtragem de desalinhamento durante o refinamento da rúbrica.",
-      "models": "Modelos de Preparação",
-      "modelNote": "Estes modelos são excluídos do grupo de comparação para impedir que qualquer modelo influencie a rúbrica contra a qual será posteriormente avaliado."
+      "title": "Etapa 2 -- Grounding Frank, Revisão e Porta de Variação",
+      "p1": "Quando há texto-fonte disponível, Frank executa antes do RRD. Ele faz triagem da fonte, extrai a doutrina, roteia para um pacote da série B e gera os materiais de benchmark usados depois.",
+      "p2": "O pipeline pausa para revisão humana antes de a construção da rúbrica continuar. A aprovação pode avançar diretamente para a pergunta base ou entrar no fluxo de variação.",
+      "screening": "Triagem e Extração da Fonte",
+      "screeningDesc": "Frank grava uma triagem de 17 itens, uma extração estruturada com 18 chaves, campos canónicos de nome e citação do caso-fonte e uma análise da pergunta.",
+      "routing": "Roteamento e Pacote Ouro",
+      "routingDesc": "A fonte extraída é roteada para um de seis pacotes: casamento, suretyship, one-year, land, UCC 2-201 ou executor. Em seguida, Frank monta o gold packet mapping e os failure modes previstos.",
+      "controller": "Resposta Ouro e Controller Card",
+      "controllerDesc": "Frank gera uma resposta de referência fraca, uma resposta ouro limpa e um controller card bloqueado de 36 campos que fixa identidade do pacote, metadados da pergunta base e modo de verificação de citação.",
+      "review": "Revisão Humana e Seleção de Faixa",
+      "reviewDesc": "Os revisores podem aprovar, rejeitar ou rerotear. Rúbricas aprovadas passam para `variation_pending`, onde o revisor pode ignorar a variação, pedir um menu de variação ou selecionar uma faixa codificada para dual-rubric mode."
     },
     "stage3": {
-      "title": "Etapa 3 -- Agrupamento para Amostra de Condicionamento",
-      "p1": "As 100 respostas de preparação são incorporadas com sentence-transformers (all-mpnet-base-v2) e agrupadas usando k-means com k fixo em 8.",
-      "p2": "A resposta centróide por grupo -- a resposta com a maior similaridade de cosseno ao vetor centróide do grupo -- é selecionada. Estes 8 textos centróides formam a amostra de condicionamento passada à etapa de proposta de rúbrica.",
-      "deviation": "Desvio do LexEval em relação ao artigo RRD: o artigo utiliza 8 respostas amostradas aleatoriamente como conjunto de condicionamento. O LexEval gera 100 respostas diversas e agrupa-as em 8 centróides representativos, garantindo cobertura completa do espaço de respostas."
+      "title": "Etapa 3 -- Geração de Respostas de Preparação do RRD",
+      "p1": "Depois de a revisão Frank terminar, ou imediatamente no caminho apenas com pergunta, quatro modelos internos de preparação geram 25 respostas cada, totalizando 100 respostas de preparação.",
+      "p2": "A resposta ouro de Frank torna-se a referência forte no caminho Frank. No caminho apenas com pergunta, o par de referência forte e fraca vem do elenco interno de preparação.",
+      "modelNote": "Estes modelos são excluídos do grupo de comparação para que não influenciem uma rúbrica contra a qual serão avaliados mais tarde."
     },
     "stage4": {
-      "title": "Etapa 4 -- Proposta Inicial de Rúbrica",
-      "p1": "O modelo de controlo propõe uma rúbrica inicial condicionada na pergunta jurídica e nas 8 respostas de condicionamento centróides. A proposta utiliza temperatura baixa (0.2) e requer saída JSON conforme o esquema de critério.",
-      "p2": "Os critérios da rúbrica devem ser informativos, abrangentes e não redundantes. O número de critérios emerge da complexidade da tarefa; nenhum número-alvo fixo é imposto."
+      "title": "Etapa 4 -- Amostra de Condicionamento com k Fixo",
+      "p1": "As 100 respostas de preparação são incorporadas com all-mpnet-base-v2 e agrupadas com k fixo igual a 8.",
+      "p2": "A resposta com maior similaridade de cosseno a cada centróide passa a ser um exemplo de condicionamento para a proposta inicial da rúbrica.",
+      "deviation": "Aqui o LexEval desvia do artigo RRD: em vez de amostrar 8 respostas aleatoriamente, ele agrupa 100 respostas de preparação e usa 8 centróides representativos."
     },
     "stage5": {
-      "title": "Etapa 5 -- Ciclo Recursivo de Decomposição-Filtragem",
-      "p1": "Este é o componente metodológico central. O ciclo itera sobre critérios de profundidade 0 (propostas iniciais) e aplica decomposição e filtragem até que uma condição de paragem seja atingida.",
-      "decomposition": "Gatilho de Decomposição",
-      "decompositionDesc": "Um critério é avaliado contra todos os 8 textos centróides usando pontuação binária passa/falha. Se passar em mais de 2 dos 8 centróides, é demasiado amplo e é decomposto em 2-3 subcritérios mais estreitos.",
-      "misalignment": "Filtragem de Desalinhamento",
-      "misalignmentDesc": "Cada subcritério proposto é avaliado contra as respostas de referência forte e fraca. Um critério é descartado apenas quando passa na referência fraca mas falha na forte, indicando uma direção de preferência invertida.",
-      "redundancy": "Filtragem de Redundância",
-      "redundancyDesc": "Cada subcritério proposto que passa a filtragem de desalinhamento é verificado contra critérios já aceites. Se o modelo de controlo o julgar redundante, é descartado.",
-      "stopping": "Regra de Paragem",
-      "stoppingDesc": "O ciclo termina quando as propostas descartadas acumuladas atingem o limiar de rejeição, quando não restam critérios amplos (convergência), ou num limite máximo de 20 passagens."
+      "title": "Etapa 5 -- Proposta Inicial de Rúbrica Condicionada por Respostas",
+      "p1": "O modelo de controlo propõe uma rúbrica inicial condicionada na pergunta jurídica, nas 8 respostas centróides e no contexto do pacote doutrinário quando disponível.",
+      "p2": "Cada critério é normalizado para o esquema implementado com id, name, description, weight e module_id quando existe estrutura modular."
     },
     "stage6": {
-      "title": "Etapa 6 -- Atribuição de Pesos Whitened-Uniform",
-      "p1": "Após o ciclo de refinamento, os pesos finais dos critérios são calculados usando ponderação whitened-uniform (WU) do artigo RRD.",
-      "p2": "Cada centróide é pontuado contra cada critério usando avaliação binária, produzindo uma matriz de pontuações. A covariância da rúbrica é estimada e o vetor de pesos whitened-uniform é derivado via decomposição em autovalores. Isto garante que dimensões correlacionadas da rúbrica não dominem a pontuação agregada."
+      "title": "Etapa 6 -- Ciclo Recursivo de Decomposição e Filtragem",
+      "p1": "Esta é a etapa central de refinamento do RRD. Critérios amplos são decompostos e depois filtrados por desalinhamento e redundância até o ciclo convergir ou atingir uma condição de paragem.",
+      "decomposition": "Gatilho de Amplitude",
+      "decompositionDesc": "Um critério é considerado demasiado amplo quando passa em mais de 2 dos 8 textos centróides. Ele é então decomposto em critérios-filho mais estreitos, com apenas um nível de decomposição permitido.",
+      "misalignment": "Filtro de Desalinhamento",
+      "misalignmentDesc": "Um critério-filho é rejeitado apenas quando passa na referência fraca e falha na referência forte. No caminho Frank, a referência forte é a resposta ouro aprovada.",
+      "redundancy": "Filtro de Redundância",
+      "redundancyDesc": "Cada critério-filho sobrevivente é comparado com os critérios já aceites e removido se o modelo de controlo o considerar redundante.",
+      "stopping": "Regra de Paragem",
+      "stoppingDesc": "O ciclo implementado pára quando as propostas rejeitadas chegam a 5, quando não restam critérios amplos ou quando o limite máximo de 20 passagens é atingido."
     },
     "stage7": {
-      "title": "Etapa 7 -- Geração de Respostas de Comparação",
-      "p1": "O utilizador seleciona entre 2 e 5 modelos do grupo de comparacao. Cada modelo gera 40 respostas a pergunta juridica. O total de respostas varia conforme o numero de modelos selecionados. A geracao de respostas executa assincronamente sob um semaforo de concorrencia.",
-      "exclusion": "Regra de Exclusão",
-      "exclusionDesc": "Um modelo é excluído do grupo de comparação se participar na montagem da rúbrica (geração de respostas de preparação ou ciclo de proposta/refinamento) ou no julgamento final (pontuação de centróides)."
+      "title": "Etapa 7 -- Ponderação Final, Enriquecimento Karthic e Rúbrica de Variação",
+      "p1": "Após o refinamento, o LexEval calcula pesos whitened-uniform e mistura priors modulares quando existe estrutura por módulos.",
+      "p2": "A rúbrica pode depois ser enriquecida com campos Karthic row-card. Se o revisor selecionou uma faixa e ativou dual-rubric mode, o sistema também pode gerar uma rúbrica de variação separada.",
+      "karthic": "Enriquecimento Karthic",
+      "karthicDesc": "O enriquecimento row-card adiciona campos como códigos de linha, orientação de NA, resumos de alvo dourado, omissões permitidas, flags de contradição, âncoras de pontuação e failure labels primárias, seguidos por uma auditoria de sobreposição.",
+      "variation": "Fluxo de Variação",
+      "variationDesc": "Rúbricas aprovadas podem persistir selected_lane_code, variation_question e variation_criteria. A rúbrica base continua em criteria, enquanto a rúbrica de variação fica armazenada separadamente."
     },
     "stage8": {
-      "title": "Etapa 8 -- Incorporação e Agrupamento",
-      "p1": "Todas as respostas de comparação são incorporadas com sentence-transformers. O número ótimo de grupos k é selecionado adaptativamente via maximização da pontuação silhouette, varrendo a partir de max(floor(n_modelos * 1.5), 4).",
-      "p2": "K-means é aplicado no k selecionado, e a resposta centróide por grupo (maior similaridade de cosseno ao vetor centróide) é identificada para pontuação."
+      "title": "Etapa 8 -- Geração de Respostas de Comparação",
+      "p1": "O utilizador seleciona 2 a 5 modelos do grupo de comparação. Cada modelo selecionado gera 40 respostas base e, em execuções dual-rubric, também 40 respostas de variação por modelo.",
+      "p2": "Cada resposta armazenada grava question_version como base ou variation, permitindo que a análise separe os dois trilhos.",
+      "exclusion": "Separação de Modelos",
+      "exclusionDesc": "Um modelo é excluído do grupo de comparação se participar na preparação, na construção da rúbrica ou no julgamento."
     },
     "stage9": {
-      "title": "Etapa 9 -- Pontuação de Centróides",
-      "p1": "O modelo de controlo pontua cada resposta centróide contra os critérios da rúbrica congelada. Pontuações são recolhidas por critério (0.0-1.0) e o total ponderado é calculado.",
-      "p2": "Os resultados são reportados sob três modos de ponderação em paralelo:",
+      "title": "Etapa 9 -- Análise Dasha: Agrupamento, Pontuação e Painéis",
+      "p1": "As respostas base são incorporadas e agrupadas com seleção adaptativa por silhouette score. Em seguida, os centróides são pontuados contra a rúbrica congelada e armazenados com visões heuristic, uniform e whitened-uniform.",
+      "p2": "Para rúbricas enriquecidas com Frank, a camada de análise também produz failure tags, metadata tags, centroid composition, overlays Dasha, verificação de citação e saídas opcionais de painéis de juízes.",
+      "weightsLabel": "Visões de Ponderação",
       "uniform": "Uniforme: peso igual por critério",
-      "heuristic": "Heurístico: pesos WU da RRD atribuídos na Etapa 6",
-      "whitened": "Whitened Uniform: normalização z-score por coluna entre grupos, depois média uniforme",
-      "resultsLabel": "Como isto aparece nos Resultados",
-      "resultsDesc": "A página de Resultados mostra a classificação principal e a comparação de ponderação lado a lado.",
-      "primary": "O modo heurístico é o modo principal usado para o grupo vencedor e o melhor modelo.",
-      "sensitivity": "Uniforme e whitened_uniform são reportados como verificações de sensibilidade, não como classificações substitutas.",
-      "disagreement": "Se os modos de ponderação divergirem, o caso deve ser tratado como sinal de sensibilidade da rúbrica, não como erro do pipeline."
+      "heuristic": "Heurístico: pesos atribuídos ou misturados a partir da rúbrica congelada",
+      "whitened": "Whitened Uniform: visão de comparação normalizada entre clusters",
+      "tagsLabel": "Tags e Overlays",
+      "tagsDesc": "A camada de análise pode adicionar metadata de Módulo 0, failure tags, blocos de composição de centróide, penalidades, caps, final_scores e metadata de verificação de citação.",
+      "dualTrackLabel": "Análise em Dois Trilhos",
+      "dualTrackDesc": "Quando dual_rubric_mode está ativo, respostas base e de variação são carregadas separadamente por question_version. Se faltarem respostas de variação, o sistema recorre à reavaliação dos centróides base contra a rúbrica de variação.",
+      "judgePanelLabel": "Painéis de Juízes e Escalação Zak",
+      "judgePanelDesc": "Modelos internos opcionais podem votar na classificação de centróides. Quando não existe maioria estrita, o sistema grava judge_votes e levanta zak_review_flag."
     },
     "stage10": {
       "title": "Etapa 10 -- Classificação",
-      "p1": "O grupo com a maior pontuação agregada da rúbrica (sob modo heurístico) é o grupo vencedor. A participação do modelo dentro do grupo vencedor é calculada como a fração de respostas de cada modelo.",
-      "p2": "O modelo com a maior participação no grupo vencedor é classificado em primeiro."
+      "p1": "A regra principal de classificação não muda: identificar o winning cluster no trilho heuristic e ordenar os modelos pela sua participação dentro desse cluster.",
+      "p2": "Final scores de Dasha, penalidades, caps e saídas dual-track são reportados em paralelo, mas não substituem a regra de classificação por winning cluster."
     },
     "controlModel": {
       "title": "Modelo de Controlo",
-      "p1": "deepseek-ai/DeepSeek-V3 serve como modelo de controlo para montagem da rúbrica e julgamento final. Esta é uma escolha da plataforma LexEval, não um requisito do artigo."
+      "p1": "deepseek-ai/DeepSeek-V3 serve como modelo de controlo para proposta, refinamento, pontuação de centróides e o caminho padrão de juiz único quando não é fornecido um judge panel."
     }
   },
   "controllerCard": {

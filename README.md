@@ -816,7 +816,7 @@ source app-venv/bin/activate
 
 # 2. Copy and configure environment
 cp .env.example .env
-# Set DATABASE_URL, SECRET_KEY, TOGETHER_API_KEY, and any local overrides.
+# Set required environment variables locally without committing any secret values.
 
 # 3. Create the database
 createdb lexeval
@@ -882,11 +882,168 @@ Current Alembic chain:
 
 ---
 
+## PostgreSQL Database Layout
+
+The current migrations create application tables in the default `public` schema. No custom PostgreSQL schema names are defined by the app migrations.
+
+Shared column contract:
+
+- every application table includes `created_at timestamptz not null default now()`
+- every application table includes `updated_at timestamptz not null default now()`
+- primary keys use `uuid`
+
+### `public.status_enum`
+
+Used by `public.evaluations.status`.
+
+| Value |
+|---|
+| `pending` |
+| `rubric_building` |
+| `rubric_frozen` |
+| `running` |
+| `done` |
+| `failed` |
+
+### `public.alembic_version`
+
+Alembic-managed migration state table.
+
+| Column | Type | Notes |
+|---|---|---|
+| `version_num` | `varchar(32)` | Current migration revision identifier |
+
+### `public.users`
+
+| Column | Type | Notes |
+|---|---|---|
+| `id` | `uuid` | Primary key |
+| `email` | `text` | Not null, unique, indexed |
+| `hashed_password` | `text` | Not null |
+| `created_at` | `timestamptz` | Not null, default `now()` |
+| `updated_at` | `timestamptz` | Not null, default `now()` |
+
+### `public.legal_cases`
+
+| Column | Type | Notes |
+|---|---|---|
+| `id` | `uuid` | Primary key |
+| `title` | `text` | Not null |
+| `filename` | `text` | Not null |
+| `raw_text` | `text` | Nullable extracted source text |
+| `created_at` | `timestamptz` | Not null, default `now()` |
+| `updated_at` | `timestamptz` | Not null, default `now()` |
+
+### `public.rubrics`
+
+| Column | Type | Notes |
+|---|---|---|
+| `id` | `uuid` | Primary key |
+| `evaluation_id` | `uuid` | Nullable FK to `evaluations.id`, indexed, `ON DELETE SET NULL` |
+| `case_id` | `uuid` | Nullable FK to `legal_cases.id`, indexed, `ON DELETE SET NULL` |
+| `question` | `text` | Nullable |
+| `status` | `text` | Not null, default `building` |
+| `criteria` | `json` | Nullable frozen base rubric criteria |
+| `raw_response` | `text` | Nullable raw proposal payload |
+| `decomposition_tree` | `json` | Nullable refinement tree |
+| `refinement_passes` | `json` | Nullable pass log |
+| `stopping_metadata` | `json` | Nullable stopping details |
+| `conditioning_sample` | `json` | Nullable fixed-k centroid texts |
+| `is_frozen` | `boolean` | Not null, default `false` |
+| `setup_responses` | `json` | Nullable setup provenance |
+| `strong_reference_text` | `text` | Nullable |
+| `weak_reference_text` | `text` | Nullable |
+| `screening_result` | `json` | Nullable Frank intake screen |
+| `source_extraction` | `json` | Nullable structured source extraction |
+| `gold_packet_mapping` | `json` | Nullable doctrinal map |
+| `doctrine_pack` | `text` | Nullable selected pack id |
+| `routing_metadata` | `json` | Nullable routing details |
+| `predicted_failure_modes` | `json` | Nullable failure-mode list |
+| `gold_answer` | `text` | Nullable approved benchmark answer |
+| `generated_question` | `text` | Nullable reverse-engineered question |
+| `self_audit_result` | `json` | Nullable Frank audit output |
+| `question_analysis` | `json` | Nullable question-checklist output |
+| `fi_status` | `text` | Nullable Frank workflow state |
+| `fi_stream_id` | `text` | Nullable SSE/log stream id |
+| `review_notes` | `text` | Nullable reviewer notes |
+| `controller_card` | `json` | Nullable locked controller card |
+| `controller_card_version` | `text` | Nullable controller-card version |
+| `selected_lane_code` | `text` | Nullable, indexed |
+| `dual_rubric_mode` | `boolean` | Not null, default `false`, indexed |
+| `base_question` | `text` | Nullable |
+| `base_gold_answer` | `text` | Nullable |
+| `variation_question` | `text` | Nullable |
+| `variation_criteria` | `json` | Nullable variation rubric |
+| `workflow_source_case_name` | `text` | Nullable |
+| `workflow_source_case_citation` | `text` | Nullable |
+| `case_citation_verification_mode` | `boolean` | Not null, default `false` |
+| `created_at` | `timestamptz` | Not null, default `now()` |
+| `updated_at` | `timestamptz` | Not null, default `now()` |
+
+### `public.evaluations`
+
+| Column | Type | Notes |
+|---|---|---|
+| `id` | `uuid` | Primary key |
+| `case_id` | `uuid` | Nullable FK to `legal_cases.id`, indexed, `ON DELETE SET NULL` |
+| `rubric_id` | `uuid` | Nullable FK to `rubrics.id`, indexed, `ON DELETE SET NULL` |
+| `question` | `text` | Not null |
+| `model_names` | `json` | Nullable selected comparison models |
+| `status` | `status_enum` | Not null, indexed |
+| `created_at` | `timestamptz` | Not null, default `now()` |
+| `updated_at` | `timestamptz` | Not null, default `now()` |
+
+### `public.model_responses`
+
+| Column | Type | Notes |
+|---|---|---|
+| `id` | `uuid` | Primary key |
+| `evaluation_id` | `uuid` | Not null FK to `evaluations.id`, indexed, `ON DELETE CASCADE` |
+| `model_name` | `text` | Not null |
+| `response_text` | `text` | Nullable |
+| `run_index` | `integer` | Not null, default `0` |
+| `question_version` | `text` | Not null, default `base` |
+| `created_at` | `timestamptz` | Not null, default `now()` |
+| `updated_at` | `timestamptz` | Not null, default `now()` |
+
+### `public.analyses`
+
+| Column | Type | Notes |
+|---|---|---|
+| `id` | `uuid` | Primary key |
+| `evaluation_id` | `uuid` | Not null FK to `evaluations.id`, indexed, `ON DELETE CASCADE` |
+| `k` | `integer` | Not null selected cluster count |
+| `clusters` | `json` | Nullable cluster membership data |
+| `centroid_indices` | `json` | Nullable centroid index list |
+| `scores` | `json` | Nullable primary heuristic scores |
+| `winning_cluster` | `integer` | Nullable |
+| `model_shares` | `json` | Nullable winning-cluster shares |
+| `weighting_mode` | `text` | Nullable primary weighting label |
+| `baseline_scores` | `json` | Nullable per-criterion scores |
+| `weighting_comparison` | `json` | Nullable comparison across weighting strategies |
+| `silhouette_scores_by_k` | `json` | Nullable adaptive-k diagnostics |
+| `failure_tags` | `json` | Nullable Frank/Dasha failure tags |
+| `centroid_composition` | `json` | Nullable centroid composition block |
+| `penalties_applied` | `json` | Nullable Dasha penalties |
+| `cap_status` | `json` | Nullable Dasha caps |
+| `final_scores` | `json` | Nullable overlaid final scores |
+| `case_citation_metadata` | `json` | Nullable citation verification output |
+| `judge_panel` | `json` | Nullable selected judge metadata |
+| `judge_votes` | `json` | Nullable per-judge results |
+| `zak_review_flag` | `json` | Nullable Zak escalation metadata |
+| `variation_scores` | `json` | Nullable dual-track / variation results |
+| `created_at` | `timestamptz` | Not null, default `now()` |
+| `updated_at` | `timestamptz` | Not null, default `now()` |
+
+---
+
 ## Environment Variables
+
+This README intentionally omits all real credential values, usernames, passwords, hosts, and token strings.
 
 | Variable | Description |
 |---|---|
-| `DATABASE_URL` | PostgreSQL async URL (`postgresql+asyncpg://...`) |
+| `DATABASE_URL` | Async PostgreSQL connection string supplied through the local environment or deployment secret store |
 | `SECRET_KEY` | JWT signing secret |
 | `ALGORITHM` | JWT algorithm, default `HS256` |
 | `ACCESS_TOKEN_EXPIRE_MINUTES` | Token TTL in minutes |

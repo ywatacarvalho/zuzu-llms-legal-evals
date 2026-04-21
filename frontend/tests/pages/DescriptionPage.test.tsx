@@ -57,7 +57,8 @@ describe("DescriptionPage", () => {
 
     expect(screen.getByText("description.modelRegistry.title")).toBeInTheDocument();
     expect(screen.getAllByText("deepseek-ai/DeepSeek-V3").length).toBeGreaterThanOrEqual(1);
-    expect(screen.getByText("description.stage9.resultsLabel")).toBeInTheDocument();
+    expect(screen.getByText("description.layerFrank")).toBeInTheDocument();
+    expect(screen.getByText("description.stage9.judgePanelLabel")).toBeInTheDocument();
 
     await waitFor(() => {
       expect(screen.getByText("description.modelRegistry.comparisonNote")).toBeInTheDocument();
