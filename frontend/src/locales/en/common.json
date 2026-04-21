@@ -1,0 +1,503 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "cases": "Cases",
+    "rubrics": "Rubrics",
+    "evaluations": "Evaluations",
+    "results": "Results",
+    "methodology": "Methodology",
+    "settings": "Settings"
+  },
+  "actions": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "upload": "Upload",
+    "generate": "Generate",
+    "run": "Run",
+    "view": "View",
+    "loading": "Loading...",
+    "retry": "Retry"
+  },
+  "evaluations": {
+    "title": "Evaluations",
+    "subtitle": "Run legal reasoning evaluations across multiple LLMs",
+    "new": "New Evaluation",
+    "form": {
+      "title": "New Evaluation",
+      "description": "Select a frozen rubric and choose 2 to 5 models to compare.",
+      "rubricLabel": "Frozen Rubric",
+      "rubricPlaceholder": "Select a rubric...",
+      "criteriaCount": "criteria",
+      "selectModels": "Select Models (2-5)",
+      "selected": "selected",
+      "submit": "Run Evaluation"
+    },
+    "table": {
+      "question": "Question",
+      "models": "Models",
+      "modelsCount": "models",
+      "responses": "Responses",
+      "status": "Status",
+      "createdAt": "Created",
+      "empty": "No evaluations yet."
+    },
+    "detail": {
+      "title": "Evaluation",
+      "status": "Status",
+      "responses": "Responses",
+      "question": "Question",
+      "models": "Selected Models",
+      "viewResults": "View Results",
+      "stop": "Stop Run",
+      "rerun": "Re-Run",
+      "pipelineLog": "Pipeline Log",
+      "logWaiting": "Waiting for pipeline to start..."
+    }
+  },
+  "rubrics": {
+    "title": "Rubrics",
+    "subtitle": "Build and manage evaluation rubrics from legal cases",
+    "new": "New Rubric",
+    "generating": "Generating rubric...",
+    "generateError": "Failed to generate rubric. Please try again.",
+    "form": {
+      "title": "New Rubric",
+      "description": "Select a case and enter a legal question (30\u20131000 characters) to build a rubric.",
+      "caseLabel": "Legal Case",
+      "casePlaceholder": "Select a case...",
+      "questionLabel": "Legal Question",
+      "questionPlaceholder": "Enter the legal question to evaluate (min. 30 characters)...",
+      "questionTooShort": "Question must be at least 30 characters.",
+      "questionTooLong": "Question must be 1000 characters or fewer.",
+      "questionRepetitive": "Question contains too many repeated characters.",
+      "submit": "Build Rubric"
+    },
+    "table": {
+      "question": "Question",
+      "criteria": "Criteria",
+      "status": "Status",
+      "createdAt": "Created",
+      "empty": "No rubrics yet."
+    },
+    "detail": {
+      "title": "Rubric",
+      "status": "Status",
+      "criteria": "Criteria",
+      "question": "Question",
+      "stop": "Stop Build",
+      "rerun": "Re-Run",
+      "pipelineLog": "Build Log",
+      "logWaiting": "Waiting for build to start..."
+    },
+    "criteria": {
+      "title": "Evaluation Rubric",
+      "count": "criteria",
+      "totalWeight": "Total weight:"
+    }
+  },
+  "rubricStatus": {
+    "building": "Building",
+    "frozen": "Frozen",
+    "failed": "Failed"
+  },
+  "cases": {
+    "title": "Cases",
+    "subtitle": "Manage your legal case PDFs",
+    "upload": "Upload Case",
+    "uploadDialog": {
+      "title": "Upload Legal Case",
+      "description": "Upload a PDF to extract text and generate an evaluation rubric.",
+      "fileLabel": "PDF File",
+      "titleLabel": "Case Title (optional)",
+      "titlePlaceholder": "Leave blank to derive from filename"
+    },
+    "table": {
+      "title": "Title",
+      "filename": "Filename",
+      "uploadedAt": "Uploaded",
+      "actions": "Actions",
+      "empty": "No cases uploaded yet."
+    },
+    "detail": {
+      "extractedText": "Extracted Text",
+      "noText": "No text could be extracted from this file.",
+      "generateRubric": "Generate Rubric"
+    }
+  },
+  "auth": {
+    "login": "Login",
+    "logout": "Logout",
+    "email": "Email",
+    "password": "Password",
+    "invalidCredentials": "Invalid email or password."
+  },
+  "errors": {
+    "generic": "Something went wrong. Please try again.",
+    "unauthorized": "You are not authorized to view this page."
+  },
+  "status": {
+    "pending": "Pending",
+    "rubric_building": "Building Rubric",
+    "rubric_frozen": "Rubric Ready",
+    "running": "Running",
+    "done": "Done",
+    "failed": "Failed"
+  },
+  "results": {
+    "list": {
+      "title": "Results",
+      "subtitle": "View analysis results for completed evaluations",
+      "empty": "No completed evaluations yet.",
+      "viewResults": "View Results"
+    },
+    "detail": {
+      "title": "Analysis Results",
+      "run": "Run Analysis",
+      "running": "Running…",
+      "runningTitle": "Analysis in progress",
+      "runningSubtitle": "Embedding responses, clustering, and scoring centroids. This may take up to a minute."
+    },
+    "runError": "Failed to run analysis. Please try again.",
+    "winner": {
+      "label": "Best Model",
+      "clusterShare": "{{pct}}% share in winning Cluster {{cluster}}",
+      "clusterScore": "Cluster Score"
+    },
+    "stats": {
+      "clusters": "Clusters (k)",
+      "winningCluster": "Winning Cluster",
+      "topScore": "Top Score"
+    },
+    "modelShare": {
+      "title": "Model Share in Winning Cluster",
+      "share": "Share"
+    },
+    "clusterScores": {
+      "title": "Cluster Rubric Scores",
+      "score": "Score"
+    },
+    "cluster": {
+      "label": "Cluster",
+      "winner": "Winner",
+      "score": "Score",
+      "responseCount": "{{count}} responses",
+      "centroidResponse": "Centroid Response",
+      "emptyCentroid": "No centroid response text is available for this cluster.",
+      "showMore": "Show more",
+      "showLess": "Show less",
+      "modelBreakdown": "Model breakdown"
+    },
+    "centroids": {
+      "title": "Cluster Centroids"
+    },
+    "models": {
+      "title": "Evaluated Models"
+    },
+    "weighting": {
+      "title": "Weighting Mode Comparison",
+      "mode": "Mode",
+      "uniform": "Uniform",
+      "heuristic": "Heuristic (WU)",
+      "whitened": "Whitened Uniform",
+      "winningCluster": "Winning cluster",
+      "topModel": "Top model",
+      "disagreement": "differs"
+    },
+    "silhouette": {
+      "title": "Silhouette Score vs. k",
+      "selectedK": "selected k"
+    },
+    "heatmap": {
+      "title": "Criterion \u00d7 Cluster Heatmap",
+      "criterion": "Criterion",
+      "cluster": "Cluster"
+    },
+    "rubric": {
+      "title": "Rubric",
+      "refinement": "Refinement Summary",
+      "passes": "Passes completed",
+      "stoppingReason": "Stopping reason",
+      "rejected": "Total rejected",
+      "decomposition": "Decomposition Tree",
+      "passLog": "Refinement Pass Log",
+      "goldenTarget": "Golden target"
+    },
+    "conditioning": {
+      "title": "Rubric Provenance",
+      "centroid": "Centroid",
+      "referencePair": "Reference Pair",
+      "strong": "Strong reference",
+      "weak": "Weak reference",
+      "setupResponses": "Setup Responses",
+      "setupCount": "responses"
+    }
+  },
+  "description": {
+    "title": "Methodology",
+    "subtitle": "How LexEval evaluates LLM legal reasoning, step by step",
+    "intro": "LexEval is an LLM legal reasoning evaluation platform. It uses a structured, two-layer pipeline aligned with the RRD (Recursive Rubric Decomposition) methodology to measure how well large language models perform on legal reasoning tasks.",
+    "twoLayers": "The pipeline is divided into two layers that run in strict sequence:",
+    "layerCore": "RRD Core Workflow",
+    "layerCoreDesc": "Response-conditioned rubric proposal, recursive decompose-filter loop, frozen rubric, and baseline evaluation. This layer must complete before the downstream layer begins.",
+    "layerDownstream": "LexEval Downstream Workflow",
+    "layerDownstreamDesc": "Embedding, clustering, centroid judging, and model ranking. This layer consumes the frozen rubric produced by the RRD core workflow.",
+    "authors": {
+      "title": "Project Authors",
+      "note": "Authors are listed alphabetically by last name.",
+      "name": "Name",
+      "affiliation": "Affiliation",
+      "people": {
+        "carvalho": {
+          "name": "Ana Carvalho",
+          "affiliation": "Northwestern University Law"
+        },
+        "chen": {
+          "name": "Qianyu Chen",
+          "affiliation": "Northwestern University"
+        },
+        "hanlon": {
+          "name": "Clark Hanlon",
+          "affiliation": "Northwestern University"
+        },
+        "liu": {
+          "name": "David Liu",
+          "affiliation": "Northwestern University"
+        },
+        "syed": {
+          "name": "Zahid Syed",
+          "affiliation": "Northwestern University"
+        },
+        "tai": {
+          "name": "Alan Tai",
+          "affiliation": "Northwestern University"
+        }
+      }
+    },
+    "stageNav": {
+      "core": "RRD Core",
+      "downstream": "LexEval Downstream",
+      "stage": "Stage",
+      "goTo": "Go to stage"
+    },
+    "modelRegistry": {
+      "title": "Implemented Model Registry",
+      "p1": "These are the model roles implemented by the application. Internal rubric and judge models are separated from the user-facing comparison pool.",
+      "internal": "Internal rubric and judge models",
+      "comparison": "User-facing comparison pool",
+      "comparisonNote": "The comparison pool is loaded from /api/v1/evaluations/models so this page reflects the implemented backend allowlist.",
+      "error": "Could not load the comparison model pool.",
+      "modelId": "Model ID",
+      "name": "Name",
+      "provider": "Provider",
+      "role": "Role",
+      "style": "Style",
+      "roles": {
+        "controlSetup": "Control model and setup model",
+        "strongSetup": "Strong reference and setup model",
+        "weakSetup": "Weak reference and setup model",
+        "setup": "Setup model"
+      },
+      "styles": {
+        "instruction": "Instruction-following",
+        "chainOfThought": "Chain-of-thought"
+      }
+    },
+    "stage1": {
+      "title": "Stage 1 -- Case Ingestion",
+      "p1": "The user uploads a legal case as a PDF document. The system extracts the full text using pdfplumber and stores it alongside a legal question as the task definition.",
+      "p2": "This text and question form the input for the entire downstream pipeline."
+    },
+    "stage2": {
+      "title": "Stage 2 -- Setup Response Generation",
+      "p1": "Four setup models each generate 25 responses to the legal question, producing 100 candidate responses total. All calls run concurrently under a semaphore.",
+      "p2": "Simultaneously, a reference pair is generated: one strong response and one weak response. This pair is used later for misalignment filtering during rubric refinement.",
+      "models": "Setup Models",
+      "modelNote": "These models are excluded from the comparison pool to prevent any model from influencing the rubric it will later be evaluated against."
+    },
+    "stage3": {
+      "title": "Stage 3 -- Clustering to Conditioning Sample",
+      "p1": "The 100 setup responses are embedded with sentence-transformers (all-mpnet-base-v2) and clustered using k-means with k fixed at 8.",
+      "p2": "The centroid response per cluster -- the response with the highest cosine similarity to the cluster centroid vector -- is selected. These 8 centroid texts form the conditioning sample passed to the rubric proposal step.",
+      "deviation": "LexEval deviation from the RRD paper: the paper uses 8 randomly sampled responses as the conditioning set. LexEval instead generates 100 diverse responses and clusters them to 8 representative centroids, ensuring full coverage of the response space."
+    },
+    "stage4": {
+      "title": "Stage 4 -- Initial Rubric Proposal",
+      "p1": "The control model proposes an initial rubric conditioned on the legal question and the 8 centroid conditioning responses. The proposal uses low temperature (0.2) and requires JSON output matching the criterion schema.",
+      "p2": "Rubric criteria should be informative, comprehensive, and non-redundant. The number of criteria emerges from task complexity; no fixed target count is imposed."
+    },
+    "stage5": {
+      "title": "Stage 5 -- Recursive Decompose-Filter Loop",
+      "p1": "This is the central methodological component. The loop iterates over depth-0 criteria (initial proposals) and applies decomposition and filtering until a stopping condition is met.",
+      "decomposition": "Decomposition Trigger",
+      "decompositionDesc": "A criterion is evaluated against all 8 centroid texts using binary pass/fail scoring. If it passes more than 2 of the 8 centroids, it is too broad and is decomposed into 2-3 narrower subcriteria.",
+      "misalignment": "Misalignment Filtering",
+      "misalignmentDesc": "Each proposed child criterion is evaluated against the strong and weak reference responses. A criterion is discarded only when it passes the weak reference but fails the strong one, indicating an inverted preference direction.",
+      "redundancy": "Redundancy Filtering",
+      "redundancyDesc": "Each proposed child criterion that passes misalignment filtering is checked against already-accepted criteria. If the control model judges it redundant, it is discarded.",
+      "stopping": "Stopping Rule",
+      "stoppingDesc": "The loop terminates when accumulated discarded proposals reach the rejection threshold, when no broad criteria remain (convergence), or at a hard cap of 20 passes."
+    },
+    "stage6": {
+      "title": "Stage 6 -- Whitened-Uniform Weight Assignment",
+      "p1": "After the refinement loop, final criterion weights are computed using whitened-uniform (WU) weighting from the RRD paper.",
+      "p2": "Each centroid is scored against each criterion using binary evaluation, producing a score matrix. The rubric covariance is estimated, and the whitened-uniform weight vector is derived via eigendecomposition. This ensures that correlated rubric dimensions do not dominate the aggregate score."
+    },
+    "stage7": {
+      "title": "Stage 7 -- Comparison Response Generation",
+      "p1": "The user selects between 2 and 5 models from the comparison pool. Each model generates 40 responses to the legal question. The total number of responses varies with the number of models selected. Response generation runs asynchronously under a concurrency semaphore.",
+      "exclusion": "Exclusion Rule",
+      "exclusionDesc": "A model is excluded from the comparison pool if it participates in rubric assembly (setup response generation or the proposal/refinement loop) or in final judging (centroid scoring)."
+    },
+    "stage8": {
+      "title": "Stage 8 -- Embedding and Clustering",
+      "p1": "All comparison responses are embedded with sentence-transformers. The optimal cluster count k is selected data-adaptively via silhouette score maximization, sweeping from max(floor(n_models * 1.5), 4).",
+      "p2": "K-means is applied at the selected k, and the centroid response per cluster (highest cosine similarity to the centroid vector) is identified for scoring."
+    },
+    "stage9": {
+      "title": "Stage 9 -- Centroid Scoring",
+      "p1": "The control model scores each centroid response against the frozen rubric criteria. Scores are collected per criterion (0.0-1.0) and the weighted total is computed.",
+      "p2": "Results are reported under three weighting modes in parallel:",
+      "uniform": "Uniform: equal weight per criterion",
+      "heuristic": "Heuristic: RRD-assigned WU weights from Stage 6",
+      "whitened": "Whitened Uniform: column-wise z-score normalization across clusters, then uniform average",
+      "resultsLabel": "How this appears in Results",
+      "resultsDesc": "The Results page shows the primary ranking and the weighting comparison side by side.",
+      "primary": "Heuristic mode is the primary ranking mode used for the winning cluster and top model.",
+      "sensitivity": "Uniform and whitened_uniform are reported as sensitivity checks rather than replacement rankings.",
+      "disagreement": "If weighting modes disagree, the case should be treated as a rubric-sensitivity signal, not as a pipeline error."
+    },
+    "stage10": {
+      "title": "Stage 10 -- Ranking",
+      "p1": "The cluster with the highest aggregate rubric score (under heuristic mode) is the winning cluster. Model share within the winning cluster is computed as the fraction of responses from each model.",
+      "p2": "The model with the highest share in the winning cluster is ranked first."
+    },
+    "controlModel": {
+      "title": "Control Model",
+      "p1": "deepseek-ai/DeepSeek-V3 serves as the control model for rubric assembly and final judging. This is a LexEval platform choice, not a paper requirement."
+    }
+  },
+  "controllerCard": {
+    "title": "Locked Controller Card",
+    "doctrinePack": "Doctrine Pack",
+    "laneCode": "Lane Code",
+    "sourceCase": "Source Case",
+    "sourceCitation": "Source Citation",
+    "verificationMode": "Citation Verification",
+    "showFull": "Show full card",
+    "hideFull": "Hide full card"
+  },
+  "variation": {
+    "title": "Variation Selection",
+    "description": "Optionally generate a variation of the base question before building the rubric.",
+    "skip": "Skip — use base question",
+    "generate": "Generate variation menu",
+    "generating": "Generating options...",
+    "confirm": "Confirm selection",
+    "select": "Select",
+    "selected": "Selected",
+    "whatChanges": "What changes",
+    "whyItFits": "Why it fits",
+    "mainRedFlag": "Main red flag",
+    "changeType": "Change type",
+    "variationRubricTitle": "Variation Rubric",
+    "noVariationCriteria": "No variation criteria available."
+  },
+  "centroidComposition": {
+    "title": "Model Composition",
+    "totalResponses": "Total responses",
+    "representedModels": "Models represented",
+    "dominantModel": "Dominant",
+    "share": "Share"
+  },
+  "overlay": {
+    "title": "Score Overlay",
+    "penalties": "Penalties Applied",
+    "noPenalties": "No penalties applied",
+    "subtotal": "Subtotal",
+    "finalScore": "Final Score",
+    "cap": "Cap Applied",
+    "noCap": "No cap",
+    "deducted": "pts"
+  },
+  "judgePanel": {
+    "title": "Judge Panel",
+    "description": "Select 1–3 internal models as judges. Comparison pool models are not eligible.",
+    "selected": "{{count}} judge(s) selected",
+    "maxWarning": "Maximum 3 judges",
+    "majorityStatus": "Majority",
+    "majority": "Majority reached",
+    "noMajority": "No majority"
+  },
+  "zak": {
+    "title": "Zak Review Required",
+    "description": "No judge panel majority was reached. Disputed clusters:",
+    "disputedClusters": "Disputed clusters"
+  },
+  "dualTrack": {
+    "title": "Dual-Track Comparison",
+    "model": "Model",
+    "baseRank": "Base rank",
+    "varRank": "Variation rank",
+    "delta": "Delta",
+    "noData": "No rank data available."
+  },
+  "module0": {
+    "title": "Module 0 Metadata",
+    "bottomLine": "Bottom line outcome",
+    "outcomeCorrectness": "Outcome correctness",
+    "reasoningAlignment": "Reasoning alignment",
+    "jurisdictionAssumption": "Jurisdiction assumption",
+    "controllingDoctrine": "Controlling doctrine"
+  },
+  "fi": {
+    "sourceScreening": {
+      "title": "Source Screening",
+      "rating": "Rating"
+    },
+    "sourceExtraction": {
+      "title": "Source Extraction"
+    },
+    "doctrinePack": {
+      "title": "Doctrine Pack",
+      "confidence": "Confidence"
+    },
+    "goldPacketMapping": {
+      "title": "Gold Packet Mapping"
+    },
+    "failureModes": {
+      "title": "Predicted Failure Modes"
+    },
+    "goldAnswer": {
+      "title": "Gold Answer"
+    },
+    "selfAudit": {
+      "title": "Self-Audit"
+    },
+    "questionAnalysis": {
+      "title": "Question Analysis"
+    },
+    "draftComparison": {
+      "title": "Draft Comparison"
+    },
+    "modeActions": {
+      "title": "Pipeline Actions",
+      "runExtract": "Run Source Extraction",
+      "extracting": "Extraction in progress...",
+      "awaitingReview": "Awaiting human review"
+    },
+    "failureTags": {
+      "title": "Failure Tags"
+    },
+    "metadataTags": {
+      "title": "Metadata Tags"
+    },
+    "reviewGate": {
+      "title": "Review Required",
+      "description": "The FrankInstructions pipeline requires human approval before continuing.",
+      "pipelineRunning": "Pipeline is running...",
+      "rejected": "This rubric was rejected during review.",
+      "approve": "Approve",
+      "reject": "Reject"
+    }
+  }
+}

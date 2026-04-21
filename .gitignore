@@ -1,0 +1,46 @@
+# Python
+app-venv/
+.venv/
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+dist/
+.env
+.env.*
+!.env.example
+.coverage
+.coverage.*
+htmlcov/
+
+# Node
+node_modules/
+frontend/dist/
+frontend/.vite/
+lib-components/dist/
+coverage/
+playwright-report/
+test-results/
+.eslintcache
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Benchmark pipeline results
+tests/fullpipeline/results/
+
+# Agent / IDE config with local secrets
+.claude/
+.windsurf/
+
+# IDE
+.vscode/
+.idea/
+
+# Misc artifacts
+null
+tests/prefilterllms/results.json

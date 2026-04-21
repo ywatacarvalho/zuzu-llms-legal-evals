@@ -1,0 +1,13 @@
+{
+  "dashboard": {
+    "title": "Dashboard",
+    "subtitle": "Overview of your legal evaluation platform",
+    "statsError": "Could not load statistics. Please refresh the page.",
+    "kpi": {
+      "totalCases": "Total Cases",
+      "evaluationsRun": "Evaluations Run",
+      "modelsEvaluated": "Models Evaluated",
+      "avgClusters": "Avg. Clusters"
+    }
+  }
+}

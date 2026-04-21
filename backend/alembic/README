@@ -1,0 +1,61 @@
+﻿# Alembic Migrations
+
+This directory contains the database migration environment for the LexEval backend.
+
+## Current migration chain
+
+1. `versions/be24afdd1cc7_initial_schema.py`
+   - Creates the initial auth, case, rubric, evaluation, response, and analysis tables.
+2. `versions/0f1a2b3c4d5e_lexeval_rrd_v2_schema.py`
+   - Moves rubrics from case-level ownership to evaluation-level ownership.
+   - Adds RRD refinement fields to `rubrics`: `decomposition_tree`, `refinement_passes`, `stopping_metadata`, `conditioning_sample`, and `is_frozen`.
+   - Adds `rubric_id`, `rubric_building`, and `rubric_frozen` support for evaluations.
+   - Adds analysis weighting fields: `weighting_mode`, `baseline_scores`, and `weighting_comparison`.
+
+## Running migrations
+
+From the repository root:
+
+```bash
+alembic upgrade head
+```
+
+The Alembic configuration lives in the root `alembic.ini` and points at this `backend/alembic/` script location.
+
+## Notes for future migrations
+
+- Keep migrations aligned with SQLAlchemy models under `backend/app/models/`.
+- Use SQLAlchemy 2.0-compatible types and PostgreSQL-compatible DDL.
+- Preserve RRD auditability fields unless a replacement migration also preserves their data.
+- Be careful when changing PostgreSQL enum values. Downgrading enum additions generally requires recreating the enum type.
+
+## Dev seed account
+
+To create a local dev user in a fresh database, run the seed script from the repo root.
+Set the email and password via environment variables or edit the script before running:
+
+```bash
+PYTHONPATH=backend python -c "
+import asyncio, os
+from dotenv import load_dotenv
+load_dotenv('.env')
+
+async def main():
+    from app.db.session import AsyncSessionLocal
+    from app.models.user import User
+    from app.core.security import hash_password
+    from sqlalchemy import select
+    email = os.environ.get('SEED_EMAIL', 'admin@lexeval.local')
+    password = os.environ.get('SEED_PASSWORD', 'change-me')
+    async with AsyncSessionLocal() as db:
+        result = await db.execute(select(User).where(User.email == email))
+        if result.scalar_one_or_none():
+            print('User already exists')
+            return
+        db.add(User(email=email, hashed_password=hash_password(password)))
+        await db.commit()
+        print(f'Dev user {email} created')
+
+asyncio.run(main())
+"
+```

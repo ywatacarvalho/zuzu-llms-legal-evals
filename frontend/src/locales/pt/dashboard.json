@@ -1,0 +1,13 @@
+{
+  "dashboard": {
+    "title": "Painel",
+    "subtitle": "Visão geral da plataforma de avaliação jurídica",
+    "statsError": "Não foi possível carregar as estatísticas. Atualize a página.",
+    "kpi": {
+      "totalCases": "Total de Casos",
+      "evaluationsRun": "Avaliações Executadas",
+      "modelsEvaluated": "Modelos Avaliados",
+      "avgClusters": "Clusters Médios"
+    }
+  }
+}

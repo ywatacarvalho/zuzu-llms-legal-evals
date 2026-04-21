@@ -1,0 +1,16 @@
+cd frontend && npx lint-staged
+
+# Run ruff on staged Python files from git root (skip silently if venv not present)
+GIT_ROOT=$(git rev-parse --show-toplevel)
+STAGED_PY=$(git diff --cached --name-only --diff-filter=ACMR | grep '\.py$' || true)
+if [ -n "$STAGED_PY" ]; then
+  PYTHON=""
+  [ -f "$GIT_ROOT/app-venv/Scripts/python.exe" ] && PYTHON="$GIT_ROOT/app-venv/Scripts/python.exe"
+  [ -f "$GIT_ROOT/app-venv/bin/python" ] && PYTHON="$GIT_ROOT/app-venv/bin/python"
+  if [ -n "$PYTHON" ]; then
+    cd "$GIT_ROOT"
+    $PYTHON -m ruff check --fix $STAGED_PY
+    $PYTHON -m ruff format $STAGED_PY
+    git add $STAGED_PY
+  fi
+fi

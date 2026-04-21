@@ -1,0 +1,502 @@
+{
+  "nav": {
+    "dashboard": "Painel",
+    "cases": "Casos",
+    "evaluations": "Avaliações",
+    "results": "Resultados",
+    "methodology": "Metodologia",
+    "settings": "Configurações"
+  },
+  "actions": {
+    "save": "Salvar",
+    "cancel": "Cancelar",
+    "upload": "Enviar",
+    "generate": "Gerar",
+    "run": "Executar",
+    "view": "Ver",
+    "loading": "Carregando...",
+    "retry": "Tentar novamente"
+  },
+  "evaluations": {
+    "title": "Avaliações",
+    "subtitle": "Execute avaliações de raciocínio jurídico em múltiplos LLMs",
+    "new": "Nova Avaliação",
+    "form": {
+      "title": "Nova Avaliação",
+      "description": "Selecione uma rubrica congelada e escolha entre 2 e 5 modelos para comparar.",
+      "rubricLabel": "Rubrica Congelada",
+      "rubricPlaceholder": "Selecione uma rubrica...",
+      "criteriaCount": "criterios",
+      "selectModels": "Selecione Modelos (2-5)",
+      "selected": "selecionados",
+      "submit": "Executar Avaliação"
+    },
+    "table": {
+      "question": "Pergunta",
+      "models": "Modelos",
+      "modelsCount": "modelos",
+      "responses": "Respostas",
+      "status": "Status",
+      "createdAt": "Criado em",
+      "empty": "Nenhuma avaliação ainda."
+    },
+    "detail": {
+      "title": "Avaliação",
+      "status": "Status",
+      "responses": "Respostas",
+      "question": "Pergunta",
+      "models": "Modelos Selecionados",
+      "viewResults": "Ver Resultados",
+      "stop": "Parar",
+      "rerun": "Re-executar",
+      "pipelineLog": "Log do Pipeline",
+      "logWaiting": "Aguardando o pipeline iniciar..."
+    }
+  },
+  "rubrics": {
+    "title": "R\u00fabricas",
+    "subtitle": "Construa e gerencie r\u00fabricas de avalia\u00e7\u00e3o a partir de casos jur\u00eddicos",
+    "new": "Nova R\u00fabrica",
+    "generating": "Gerando r\u00fabrica...",
+    "generateError": "Falha ao gerar a r\u00fabrica. Por favor, tente novamente.",
+    "form": {
+      "title": "Nova R\u00fabrica",
+      "description": "Selecione um caso e insira uma pergunta jur\u00eddica (30\u20131000 caracteres) para construir uma r\u00fabrica.",
+      "caseLabel": "Caso Jur\u00eddico",
+      "casePlaceholder": "Selecione um caso...",
+      "questionLabel": "Pergunta Jur\u00eddica",
+      "questionPlaceholder": "Insira a pergunta jur\u00eddica a avaliar (m\u00edn. 30 caracteres)...",
+      "questionTooShort": "A pergunta deve ter pelo menos 30 caracteres.",
+      "questionTooLong": "A pergunta deve ter no m\u00e1ximo 1000 caracteres.",
+      "questionRepetitive": "A pergunta cont\u00e9m muitos caracteres repetidos.",
+      "submit": "Construir R\u00fabrica"
+    },
+    "table": {
+      "question": "Pergunta",
+      "criteria": "Crit\u00e9rios",
+      "status": "Status",
+      "createdAt": "Criado em",
+      "empty": "Nenhuma r\u00fabrica ainda."
+    },
+    "detail": {
+      "title": "R\u00fabrica",
+      "status": "Status",
+      "criteria": "Crit\u00e9rios",
+      "question": "Pergunta",
+      "stop": "Parar Constru\u00e7\u00e3o",
+      "rerun": "Re-executar",
+      "pipelineLog": "Log da Constru\u00e7\u00e3o",
+      "logWaiting": "Aguardando a constru\u00e7\u00e3o iniciar..."
+    },
+    "criteria": {
+      "title": "R\u00fabrica de Avalia\u00e7\u00e3o",
+      "count": "crit\u00e9rios",
+      "totalWeight": "Peso total:"
+    }
+  },
+  "rubricStatus": {
+    "building": "Construindo",
+    "frozen": "Congelada",
+    "failed": "Falhou"
+  },
+  "cases": {
+    "title": "Casos",
+    "subtitle": "Gerencie seus PDFs de casos jurídicos",
+    "upload": "Enviar Caso",
+    "uploadDialog": {
+      "title": "Enviar Caso Jurídico",
+      "description": "Envie um PDF para extrair texto e gerar um rubro de avaliação.",
+      "fileLabel": "Arquivo PDF",
+      "titleLabel": "Título do Caso (opcional)",
+      "titlePlaceholder": "Deixe em branco para usar o nome do arquivo"
+    },
+    "table": {
+      "title": "Título",
+      "filename": "Arquivo",
+      "uploadedAt": "Enviado em",
+      "actions": "Ações",
+      "empty": "Nenhum caso enviado ainda."
+    },
+    "detail": {
+      "extractedText": "Texto Extraído",
+      "noText": "Nenhum texto pôde ser extraído deste arquivo.",
+      "generateRubric": "Gerar Rubro"
+    }
+  },
+  "auth": {
+    "login": "Entrar",
+    "logout": "Sair",
+    "email": "E-mail",
+    "password": "Senha",
+    "invalidCredentials": "E-mail ou senha inválidos."
+  },
+  "errors": {
+    "generic": "Algo deu errado. Por favor, tente novamente.",
+    "unauthorized": "Você não tem autorização para visualizar esta página."
+  },
+  "status": {
+    "pending": "Pendente",
+    "rubric_building": "Construindo Rúbrica",
+    "rubric_frozen": "Rúbrica Pronta",
+    "running": "Em execução",
+    "done": "Concluído",
+    "failed": "Falhou"
+  },
+  "results": {
+    "list": {
+      "title": "Resultados",
+      "subtitle": "Veja os resultados de análise das avaliações concluídas",
+      "empty": "Nenhuma avaliação concluída ainda.",
+      "viewResults": "Ver Resultados"
+    },
+    "detail": {
+      "title": "Resultados da Análise",
+      "run": "Executar Análise",
+      "running": "Executando…",
+      "runningTitle": "Análise em andamento",
+      "runningSubtitle": "Incorporando respostas, agrupando e pontuando centróides. Isso pode levar até um minuto."
+    },
+    "runError": "Falha ao executar a análise. Por favor, tente novamente.",
+    "winner": {
+      "label": "Melhor Modelo",
+      "clusterShare": "{{pct}}% de participação no Cluster {{cluster}} vencedor",
+      "clusterScore": "Pontuação do Cluster"
+    },
+    "stats": {
+      "clusters": "Clusters (k)",
+      "winningCluster": "Cluster Vencedor",
+      "topScore": "Maior Pontuação"
+    },
+    "modelShare": {
+      "title": "Participação dos Modelos no Cluster Vencedor",
+      "share": "Participação"
+    },
+    "clusterScores": {
+      "title": "Pontuações dos Clusters",
+      "score": "Pontuação"
+    },
+    "cluster": {
+      "label": "Cluster",
+      "winner": "Vencedor",
+      "score": "Pontuação",
+      "responseCount": "{{count}} respostas",
+      "centroidResponse": "Resposta Centróide",
+      "emptyCentroid": "Nenhum texto de resposta centróide está disponível para este cluster.",
+      "showMore": "Mostrar mais",
+      "showLess": "Mostrar menos",
+      "modelBreakdown": "Composição por modelo"
+    },
+    "centroids": {
+      "title": "Centróides dos Clusters"
+    },
+    "models": {
+      "title": "Modelos Avaliados"
+    },
+    "weighting": {
+      "title": "Comparação de Modos de Ponderação",
+      "mode": "Modo",
+      "uniform": "Uniforme",
+      "heuristic": "Heurístico (WU)",
+      "whitened": "Whitened Uniform",
+      "winningCluster": "Cluster vencedor",
+      "topModel": "Melhor modelo",
+      "disagreement": "diverge"
+    },
+    "silhouette": {
+      "title": "Pontuação Silhouette vs. k",
+      "selectedK": "k selecionado"
+    },
+    "heatmap": {
+      "title": "Mapa de Calor Critério \u00d7 Cluster",
+      "criterion": "Critério",
+      "cluster": "Cluster"
+    },
+    "rubric": {
+      "title": "Rúbrica",
+      "refinement": "Resumo do Refinamento",
+      "passes": "Passagens concluídas",
+      "stoppingReason": "Motivo de paragem",
+      "rejected": "Total rejeitado",
+      "decomposition": "Árvore de Decomposição",
+      "passLog": "Log de Passagens",
+      "goldenTarget": "Alvo dourado"
+    },
+    "conditioning": {
+      "title": "Proveniência da Rúbrica",
+      "centroid": "Centróide",
+      "referencePair": "Par de Referência",
+      "strong": "Referência forte",
+      "weak": "Referência fraca",
+      "setupResponses": "Respostas de Preparação",
+      "setupCount": "respostas"
+    }
+  },
+  "description": {
+    "title": "Metodologia",
+    "subtitle": "Como o LexEval avalia o raciocínio jurídico de LLMs, passo a passo",
+    "intro": "O LexEval é uma plataforma de avaliação de raciocínio jurídico de LLMs. Utiliza um pipeline estruturado de duas camadas, alinhado com a metodologia RRD (Recursive Rubric Decomposition), para medir o desempenho de modelos de linguagem em tarefas de raciocínio jurídico.",
+    "twoLayers": "O pipeline é dividido em duas camadas que executam em sequência estrita:",
+    "layerCore": "Fluxo Central RRD",
+    "layerCoreDesc": "Proposta de rúbrica condicionada por respostas, ciclo recursivo de decomposição-filtragem, rúbrica congelada e avaliação de referência. Esta camada deve ser concluída antes do início da camada posterior.",
+    "layerDownstream": "Fluxo Posterior LexEval",
+    "layerDownstreamDesc": "Incorporação, agrupamento, julgamento de centróides e classificação de modelos. Esta camada consome a rúbrica congelada produzida pelo fluxo central RRD.",
+    "authors": {
+      "title": "Autores do Projeto",
+      "note": "Os autores estao listados alfabeticamente pelo ultimo sobrenome.",
+      "name": "Nome",
+      "affiliation": "Instituicao",
+      "people": {
+        "carvalho": {
+          "name": "Ana Carvalho",
+          "affiliation": "Northwestern University Law"
+        },
+        "chen": {
+          "name": "Qianyu Chen",
+          "affiliation": "Northwestern University"
+        },
+        "hanlon": {
+          "name": "Clark Hanlon",
+          "affiliation": "Northwestern University"
+        },
+        "liu": {
+          "name": "David Liu",
+          "affiliation": "Northwestern University"
+        },
+        "syed": {
+          "name": "Zahid Syed",
+          "affiliation": "Northwestern University"
+        },
+        "tai": {
+          "name": "Alan Tai",
+          "affiliation": "Northwestern University"
+        }
+      }
+    },
+    "stageNav": {
+      "core": "Núcleo RRD",
+      "downstream": "Fluxo Posterior LexEval",
+      "stage": "Etapa",
+      "goTo": "Ir para etapa"
+    },
+    "modelRegistry": {
+      "title": "Registro de Modelos Implementados",
+      "p1": "Estes são os papéis de modelo implementados pela aplicação. Modelos internos de rúbrica e julgamento ficam separados do grupo de comparação visível ao utilizador.",
+      "internal": "Modelos internos de rúbrica e julgamento",
+      "comparison": "Grupo de comparação visível ao utilizador",
+      "comparisonNote": "O grupo de comparação é carregado de /api/v1/evaluations/models para que esta página reflita a lista implementada no backend.",
+      "error": "Não foi possível carregar o grupo de modelos de comparação.",
+      "modelId": "ID do modelo",
+      "name": "Nome",
+      "provider": "Fornecedor",
+      "role": "Papel",
+      "style": "Estilo",
+      "roles": {
+        "controlSetup": "Modelo de controlo e modelo de preparação",
+        "strongSetup": "Referência forte e modelo de preparação",
+        "weakSetup": "Referência fraca e modelo de preparação",
+        "setup": "Modelo de preparação"
+      },
+      "styles": {
+        "instruction": "Seguimento de instruções",
+        "chainOfThought": "Cadeia de raciocínio"
+      }
+    },
+    "stage1": {
+      "title": "Etapa 1 -- Ingestão do Caso",
+      "p1": "O utilizador envia um caso jurídico como documento PDF. O sistema extrai o texto completo utilizando pdfplumber e armazena-o juntamente com uma pergunta jurídica como definição da tarefa.",
+      "p2": "Este texto e pergunta formam a entrada para todo o pipeline subsequente."
+    },
+    "stage2": {
+      "title": "Etapa 2 -- Geração de Respostas de Preparação",
+      "p1": "Quatro modelos de preparação geram cada um 25 respostas à pergunta jurídica, produzindo 100 respostas candidatas no total. Todas as chamadas executam concorrentemente sob um semáforo.",
+      "p2": "Simultaneamente, um par de referência é gerado: uma resposta forte e uma resposta fraca. Este par é utilizado posteriormente para filtragem de desalinhamento durante o refinamento da rúbrica.",
+      "models": "Modelos de Preparação",
+      "modelNote": "Estes modelos são excluídos do grupo de comparação para impedir que qualquer modelo influencie a rúbrica contra a qual será posteriormente avaliado."
+    },
+    "stage3": {
+      "title": "Etapa 3 -- Agrupamento para Amostra de Condicionamento",
+      "p1": "As 100 respostas de preparação são incorporadas com sentence-transformers (all-mpnet-base-v2) e agrupadas usando k-means com k fixo em 8.",
+      "p2": "A resposta centróide por grupo -- a resposta com a maior similaridade de cosseno ao vetor centróide do grupo -- é selecionada. Estes 8 textos centróides formam a amostra de condicionamento passada à etapa de proposta de rúbrica.",
+      "deviation": "Desvio do LexEval em relação ao artigo RRD: o artigo utiliza 8 respostas amostradas aleatoriamente como conjunto de condicionamento. O LexEval gera 100 respostas diversas e agrupa-as em 8 centróides representativos, garantindo cobertura completa do espaço de respostas."
+    },
+    "stage4": {
+      "title": "Etapa 4 -- Proposta Inicial de Rúbrica",
+      "p1": "O modelo de controlo propõe uma rúbrica inicial condicionada na pergunta jurídica e nas 8 respostas de condicionamento centróides. A proposta utiliza temperatura baixa (0.2) e requer saída JSON conforme o esquema de critério.",
+      "p2": "Os critérios da rúbrica devem ser informativos, abrangentes e não redundantes. O número de critérios emerge da complexidade da tarefa; nenhum número-alvo fixo é imposto."
+    },
+    "stage5": {
+      "title": "Etapa 5 -- Ciclo Recursivo de Decomposição-Filtragem",
+      "p1": "Este é o componente metodológico central. O ciclo itera sobre critérios de profundidade 0 (propostas iniciais) e aplica decomposição e filtragem até que uma condição de paragem seja atingida.",
+      "decomposition": "Gatilho de Decomposição",
+      "decompositionDesc": "Um critério é avaliado contra todos os 8 textos centróides usando pontuação binária passa/falha. Se passar em mais de 2 dos 8 centróides, é demasiado amplo e é decomposto em 2-3 subcritérios mais estreitos.",
+      "misalignment": "Filtragem de Desalinhamento",
+      "misalignmentDesc": "Cada subcritério proposto é avaliado contra as respostas de referência forte e fraca. Um critério é descartado apenas quando passa na referência fraca mas falha na forte, indicando uma direção de preferência invertida.",
+      "redundancy": "Filtragem de Redundância",
+      "redundancyDesc": "Cada subcritério proposto que passa a filtragem de desalinhamento é verificado contra critérios já aceites. Se o modelo de controlo o julgar redundante, é descartado.",
+      "stopping": "Regra de Paragem",
+      "stoppingDesc": "O ciclo termina quando as propostas descartadas acumuladas atingem o limiar de rejeição, quando não restam critérios amplos (convergência), ou num limite máximo de 20 passagens."
+    },
+    "stage6": {
+      "title": "Etapa 6 -- Atribuição de Pesos Whitened-Uniform",
+      "p1": "Após o ciclo de refinamento, os pesos finais dos critérios são calculados usando ponderação whitened-uniform (WU) do artigo RRD.",
+      "p2": "Cada centróide é pontuado contra cada critério usando avaliação binária, produzindo uma matriz de pontuações. A covariância da rúbrica é estimada e o vetor de pesos whitened-uniform é derivado via decomposição em autovalores. Isto garante que dimensões correlacionadas da rúbrica não dominem a pontuação agregada."
+    },
+    "stage7": {
+      "title": "Etapa 7 -- Geração de Respostas de Comparação",
+      "p1": "O utilizador seleciona entre 2 e 5 modelos do grupo de comparacao. Cada modelo gera 40 respostas a pergunta juridica. O total de respostas varia conforme o numero de modelos selecionados. A geracao de respostas executa assincronamente sob um semaforo de concorrencia.",
+      "exclusion": "Regra de Exclusão",
+      "exclusionDesc": "Um modelo é excluído do grupo de comparação se participar na montagem da rúbrica (geração de respostas de preparação ou ciclo de proposta/refinamento) ou no julgamento final (pontuação de centróides)."
+    },
+    "stage8": {
+      "title": "Etapa 8 -- Incorporação e Agrupamento",
+      "p1": "Todas as respostas de comparação são incorporadas com sentence-transformers. O número ótimo de grupos k é selecionado adaptativamente via maximização da pontuação silhouette, varrendo a partir de max(floor(n_modelos * 1.5), 4).",
+      "p2": "K-means é aplicado no k selecionado, e a resposta centróide por grupo (maior similaridade de cosseno ao vetor centróide) é identificada para pontuação."
+    },
+    "stage9": {
+      "title": "Etapa 9 -- Pontuação de Centróides",
+      "p1": "O modelo de controlo pontua cada resposta centróide contra os critérios da rúbrica congelada. Pontuações são recolhidas por critério (0.0-1.0) e o total ponderado é calculado.",
+      "p2": "Os resultados são reportados sob três modos de ponderação em paralelo:",
+      "uniform": "Uniforme: peso igual por critério",
+      "heuristic": "Heurístico: pesos WU da RRD atribuídos na Etapa 6",
+      "whitened": "Whitened Uniform: normalização z-score por coluna entre grupos, depois média uniforme",
+      "resultsLabel": "Como isto aparece nos Resultados",
+      "resultsDesc": "A página de Resultados mostra a classificação principal e a comparação de ponderação lado a lado.",
+      "primary": "O modo heurístico é o modo principal usado para o grupo vencedor e o melhor modelo.",
+      "sensitivity": "Uniforme e whitened_uniform são reportados como verificações de sensibilidade, não como classificações substitutas.",
+      "disagreement": "Se os modos de ponderação divergirem, o caso deve ser tratado como sinal de sensibilidade da rúbrica, não como erro do pipeline."
+    },
+    "stage10": {
+      "title": "Etapa 10 -- Classificação",
+      "p1": "O grupo com a maior pontuação agregada da rúbrica (sob modo heurístico) é o grupo vencedor. A participação do modelo dentro do grupo vencedor é calculada como a fração de respostas de cada modelo.",
+      "p2": "O modelo com a maior participação no grupo vencedor é classificado em primeiro."
+    },
+    "controlModel": {
+      "title": "Modelo de Controlo",
+      "p1": "deepseek-ai/DeepSeek-V3 serve como modelo de controlo para montagem da rúbrica e julgamento final. Esta é uma escolha da plataforma LexEval, não um requisito do artigo."
+    }
+  },
+  "controllerCard": {
+    "title": "Ficha de Controle Bloqueada",
+    "doctrinePack": "Pacote Doutrinário",
+    "laneCode": "Código de Variação",
+    "sourceCase": "Caso Fonte",
+    "sourceCitation": "Citação do Caso Fonte",
+    "verificationMode": "Verificação de Citação",
+    "showFull": "Ver ficha completa",
+    "hideFull": "Ocultar ficha completa"
+  },
+  "variation": {
+    "title": "Seleção de Variação",
+    "description": "Opcionalmente, gere uma variação da pergunta base antes de construir a rubrica.",
+    "skip": "Ignorar — usar pergunta base",
+    "generate": "Gerar menu de variações",
+    "generating": "Gerando opções...",
+    "confirm": "Confirmar seleção",
+    "select": "Selecionar",
+    "selected": "Selecionado",
+    "whatChanges": "O que muda",
+    "whyItFits": "Por que se aplica",
+    "mainRedFlag": "Principal alerta",
+    "changeType": "Tipo de alteração",
+    "variationRubricTitle": "Rubrica de Variação",
+    "noVariationCriteria": "Nenhum critério de variação disponível."
+  },
+  "centroidComposition": {
+    "title": "Composição do Modelo",
+    "totalResponses": "Total de respostas",
+    "representedModels": "Modelos representados",
+    "dominantModel": "Dominante",
+    "share": "Proporção"
+  },
+  "overlay": {
+    "title": "Ajuste de Pontuação",
+    "penalties": "Penalidades Aplicadas",
+    "noPenalties": "Nenhuma penalidade aplicada",
+    "subtotal": "Subtotal",
+    "finalScore": "Pontuação Final",
+    "cap": "Teto Aplicado",
+    "noCap": "Sem teto",
+    "deducted": "pts"
+  },
+  "judgePanel": {
+    "title": "Painel de Juízes",
+    "description": "Selecione 1–3 modelos internos como juízes. Modelos do grupo de comparação não são elegíveis.",
+    "selected": "{{count}} juiz(es) selecionado(s)",
+    "maxWarning": "Máximo de 3 juízes",
+    "majorityStatus": "Maioria",
+    "majority": "Maioria alcançada",
+    "noMajority": "Sem maioria"
+  },
+  "zak": {
+    "title": "Revisão Zak Necessária",
+    "description": "Nenhuma maioria foi alcançada pelo painel. Clusters disputados:",
+    "disputedClusters": "Clusters disputados"
+  },
+  "dualTrack": {
+    "title": "Comparação Dual",
+    "model": "Modelo",
+    "baseRank": "Rank base",
+    "varRank": "Rank variação",
+    "delta": "Delta",
+    "noData": "Dados de ranking não disponíveis."
+  },
+  "module0": {
+    "title": "Metadados do Módulo 0",
+    "bottomLine": "Resultado final",
+    "outcomeCorrectness": "Correção do resultado",
+    "reasoningAlignment": "Alinhamento do raciocínio",
+    "jurisdictionAssumption": "Premissa jurisdicional",
+    "controllingDoctrine": "Doutrina controladora"
+  },
+  "fi": {
+    "sourceScreening": {
+      "title": "Triagem da Fonte",
+      "rating": "Classificação"
+    },
+    "sourceExtraction": {
+      "title": "Extração da Fonte"
+    },
+    "doctrinePack": {
+      "title": "Pacote Doutrinário",
+      "confidence": "Confiança"
+    },
+    "goldPacketMapping": {
+      "title": "Mapeamento do Pacote Gold"
+    },
+    "failureModes": {
+      "title": "Modos de Falha Previstos"
+    },
+    "goldAnswer": {
+      "title": "Resposta Gold"
+    },
+    "selfAudit": {
+      "title": "Autoauditoria"
+    },
+    "questionAnalysis": {
+      "title": "Análise da Questão"
+    },
+    "draftComparison": {
+      "title": "Comparação de Rascunho"
+    },
+    "modeActions": {
+      "title": "Ações do Pipeline",
+      "runExtract": "Executar Extração da Fonte",
+      "extracting": "Extração em progresso...",
+      "awaitingReview": "A aguardar revisão humana"
+    },
+    "failureTags": {
+      "title": "Etiquetas de Falha"
+    },
+    "metadataTags": {
+      "title": "Etiquetas de Metadados"
+    },
+    "reviewGate": {
+      "title": "Revisão Necessária",
+      "description": "O pipeline FrankInstructions requer aprovação humana antes de continuar.",
+      "pipelineRunning": "O pipeline está em execução...",
+      "rejected": "Esta rúbrica foi rejeitada durante a revisão.",
+      "approve": "Aprovar",
+      "reject": "Rejeitar"
+    }
+  }
+}

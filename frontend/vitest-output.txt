@@ -1,0 +1,2102 @@
+﻿
+[1m[7m[36m RUN [39m[27m[22m [36mv2.1.9 [39m[90mD:/ALEX/OPTIMIZE/RESEARCH/llms-legal-evals/frontend[39m
+
+ [32mÔ£ô[39m tests/services/services.test.ts[2m > [22mgetDashboardStats[2m > [22mcalls GET /dashboard/stats and returns data
+ [32mÔ£ô[39m tests/services/services.test.ts[2m > [22mlistCases[2m > [22mcalls GET /cases and returns array
+ [32mÔ£ô[39m tests/services/services.test.ts[2m > [22mgetCase[2m > [22mcalls GET /cases/:id
+ [32mÔ£ô[39m tests/services/services.test.ts[2m > [22muploadCase[2m > [22mposts FormData to /cases with title
+ [32mÔ£ô[39m tests/services/services.test.ts[2m > [22muploadCase[2m > [22mposts FormData to /cases without title
+ [32mÔ£ô[39m tests/services/services.test.ts[2m > [22mlistEvaluations[2m > [22mcalls GET /evaluations
+ [32mÔ£ô[39m tests/services/services.test.ts[2m > [22mgetEvaluation[2m > [22mcalls GET /evaluations/:id
+ [32mÔ£ô[39m tests/services/services.test.ts[2m > [22mcreateEvaluation[2m > [22mposts to /evaluations with correct body
+ [32mÔ£ô[39m tests/services/services.test.ts[2m > [22mlistAvailableModels[2m > [22mcalls GET /evaluations/models
+ [32mÔ£ô[39m tests/services/services.test.ts[2m > [22mgetAnalysis[2m > [22mcalls GET /analysis/:evalId
+ [32mÔ£ô[39m tests/services/services.test.ts[2m > [22mrunAnalysis[2m > [22mcalls POST /analysis/:evalId/run
+ [32mÔ£ô[39m tests/services/services.test.ts[2m > [22mgetRubricByCase[2m > [22mcalls GET /rubrics/case/:caseId and returns rubric
+ [32mÔ£ô[39m tests/services/services.test.ts[2m > [22mgetRubricByCase[2m > [22mreturns null on 404
+ [32mÔ£ô[39m tests/services/services.test.ts[2m > [22mgetRubricByEvaluation[2m > [22mcalls GET /rubrics/evaluation/:evalId and returns rubric
+ [32mÔ£ô[39m tests/services/services.test.ts[2m > [22mgetRubricByEvaluation[2m > [22mreturns null on 404
+ [32mÔ£ô[39m tests/components/analysis/WeightingComparison.test.tsx[2m > [22mWeightingComparison[2m > [22mrenders three columns for uniform, heuristic, whitened_uniform
+ [32mÔ£ô[39m tests/components/analysis/WeightingComparison.test.tsx[2m > [22mWeightingComparison[2m > [22mshows winning cluster and top model per mode
+ [32mÔ£ô[39m tests/components/analysis/WeightingComparison.test.tsx[2m > [22mWeightingComparison[2m > [22mhighlights disagreement when winning clusters differ across modes
+ [32mÔ£ô[39m tests/components/analysis/WeightingComparison.test.tsx[2m > [22mWeightingComparison[2m > [22mrenders nothing when weighting_comparison is null
+ [32mÔ£ô[39m tests/components/analysis/CriterionHeatmap.test.tsx[2m > [22mCriterionHeatmap[2m > [22mrenders a grid with rows=clusters, columns=criteria
+ [32mÔ£ô[39m tests/components/analysis/CriterionHeatmap.test.tsx[2m > [22mCriterionHeatmap[2m > [22mshows score values in cells
+ [32mÔ£ô[39m tests/components/analysis/CriterionHeatmap.test.tsx[2m > [22mCriterionHeatmap[2m > [22mhighlights the winning cluster row
+ [32mÔ£ô[39m tests/components/analysis/CriterionHeatmap.test.tsx[2m > [22mCriterionHeatmap[2m > [22mrenders nothing when baseline_scores is null
+ [32mÔ£ô[39m tests/components/analysis/CriterionHeatmap.test.tsx[2m > [22mCriterionHeatmap[2m > [22mrenders nothing when criteria is null
+ [32mÔ£ô[39m tests/components/analysis/CentroidCard.test.tsx[2m > [22mCentroidCard[2m > [22mrenders cluster id, score, and response count
+ [32mÔ£ô[39m tests/components/analysis/CentroidCard.test.tsx[2m > [22mCentroidCard[2m > [22mshows winner badge for winning cluster
+ [32mÔ£ô[39m tests/components/analysis/CentroidCard.test.tsx[2m > [22mCentroidCard[2m > [22mdoes not show winner badge for non-winner
+ [32mÔ£ô[39m tests/components/analysis/CentroidCard.test.tsx[2m > [22mCentroidCard[2m > [22mtruncates long centroid text with show more button
+ [32mÔ£ô[39m tests/components/analysis/ConditioningSamplePanel.test.tsx[2m > [22mConditioningSamplePanel[2m > [22mrenders 8 numbered centroid cards from conditioning_sample after expand
+ [32mÔ£ô[39m tests/components/analysis/RubricSection.test.tsx[2m > [22mRubricSection[2m > [22mrenders criteria list with names, descriptions, weights after expand
+ [32mÔ£ô[39m tests/components/analysis/CentroidCard.test.tsx[2m > [22mCentroidCard[2m > [22mexpands text on show more click
+ [32mÔ£ô[39m tests/components/analysis/CentroidCard.test.tsx[2m > [22mCentroidCard[2m > [22mshows model breakdown when model_counts is present
+ [32mÔ£ô[39m tests/components/analysis/CentroidCard.test.tsx[2m > [22mCentroidCard[2m > [22mhides model breakdown when model_counts is absent
+ [32mÔ£ô[39m tests/components/analysis/ConditioningSamplePanel.test.tsx[2m > [22mConditioningSamplePanel[2m > [22mshows strong and weak reference texts side by side
+ [32mÔ£ô[39m tests/components/analysis/RubricSection.test.tsx[2m > [22mRubricSection[2m > [22mshows refinement summary: passes, stopping reason, rejected count
+ [32mÔ£ô[39m tests/components/analysis/RubricSection.test.tsx[2m > [22mRubricSection[2m > [22mrenders decomposition tree when decomposition_tree is non-empty
+ [32mÔ£ô[39m tests/components/analysis/ConditioningSamplePanel.test.tsx[2m > [22mConditioningSamplePanel[2m > [22mshows setup response count per model
+ [32mÔ£ô[39m tests/components/analysis/ConditioningSamplePanel.test.tsx[2m > [22mConditioningSamplePanel[2m > [22mrenders nothing when no relevant data is present
+ [32mÔ£ô[39m tests/components/analysis/RubricSection.test.tsx[2m > [22mRubricSection[2m > [22mcollapses decomposition tree contents by default
+ [32mÔ£ô[39m tests/components/analysis/RubricSection.test.tsx[2m > [22mRubricSection[2m > [22mrenders decomposition tree contents after expanding
+ [32mÔ£ô[39m tests/components/analysis/SilhouetteChart.test.tsx[2m > [22mSilhouetteChart[2m > [22mrenders a Recharts line chart card
+ [32mÔ£ô[39m tests/components/analysis/SilhouetteChart.test.tsx[2m > [22mSilhouetteChart[2m > [22mdoes not crash when selectedK is present
+ [32mÔ£ô[39m tests/components/analysis/SilhouetteChart.test.tsx[2m > [22mSilhouetteChart[2m > [22mrenders nothing when silhouette_scores_by_k is null
+ [32mÔ£ô[39m tests/components/analysis/SilhouetteChart.test.tsx[2m > [22mSilhouetteChart[2m > [22mrenders nothing when silhouette_scores_by_k is empty
+ [32mÔ£ô[39m tests/components/analysis/RubricSection.test.tsx[2m > [22mRubricSection[2m > [22mrenders refinement pass log entries after expanding
+ [32mÔ£ô[39m tests/components/analysis/RubricSection.test.tsx[2m > [22mRubricSection[2m > [22mrenders nothing when rubric is null
+node.exe : [90mstderr[2m | 
+tests/components/analysis/ResultsPage.test.tsx[2m > [22m[2mResultsPage[2m 
+> [22m[2mshows loading state initially
+No C:\Program Files\nodejs\npx.ps1:29 caractere:3
++   & $NODE_EXE $NPX_CLI_JS $args
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([90mstderr[2m...state initially 
+   :String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+[22m[39mÔÜá´©Å React Router Future Flag Warning: React Router will begin 
+wrapping state updates in `React.startTransition` in v7. You can use the 
+`v7_startTransition` future flag to opt-in early. For more information, see 
+https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+ÔÜá´©Å React Router Future Flag Warning: Relative route resolution within 
+Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future 
+flag to opt-in early. For more information, see 
+https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+ [32mÔ£ô[39m tests/components/analysis/ResultsPage.test.tsx[2m > [22mResultsPage[2m > [22mshows loading state initially
+ [32mÔ£ô[39m tests/components/analysis/ResultsPage.test.tsx[2m > [22mResultsPage[2m > [22mshows Run Analysis button when no analysis exists
+ [31m├ù[39m tests/components/analysis/ResultsPage.test.tsx[2m > [22mResultsPage[2m > [22mrenders results dashboard when analysis exists
+[31m   ÔåÆ Found multiple elements with the text: LiquidAI/LFM2-24B-A2B
+
+Here are the matching elements:
+
+Ignored nodes: comments, script, style
+[36m<p[31m
+  [33mclass[31m=[32m"text-2xl font-bold text-foreground"[31m
+[36m>[31m
+  [0mLiquidAI/LFM2-24B-A2B[0m
+[36m</p>[31m
+
+Ignored nodes: comments, script, style
+[36m<span[31m
+  [33mclass[31m=[32m"rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground"[31m
+[36m>[31m
+  [0mLiquidAI/LFM2-24B-A2B[0m
+[36m</span>[31m
+
+Ignored nodes: comments, script, style
+[36m<p[31m
+  [33mclass[31m=[32m"truncate text-sm font-medium text-foreground"[31m
+[36m>[31m
+  [0mLiquidAI/LFM2-24B-A2B[0m
+[36m</p>[31m
+
+Ignored nodes: comments, script, style
+[36m<p[31m
+  [33mclass[31m=[32m"truncate text-sm font-medium text-foreground"[31m
+[36m>[31m
+  [0mLiquidAI/LFM2-24B-A2B[0m
+[36m</p>[31m
+
+Ignored nodes: comments, script, style
+[36m<p[31m
+  [33mclass[31m=[32m"truncate text-sm font-medium text-foreground"[31m
+[36m>[31m
+  [0mLiquidAI/LFM2-24B-A2B[0m
+[36m</p>[31m
+
+(If this is intentional, then use the `*AllBy*` variant of the query (like `queryAllByText`, `getAllByText`, or `findAllByText`)).
+
+Ignored nodes: comments, script, style
+[36m<body>[31m
+  [36m<div>[31m
+    [36m<div[31m
+      [33mclass[31m=[32m"space-y-6"[31m
+    [36m>[31m
+      [36m<div[31m
+        [33mclass[31m=[32m"flex items-center gap-3"[31m
+      [36m>[31m
+        [36m<button[31m
+          [33mclass[31m=[32m"inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 active:scale-[0.98] hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3"[31m
+        [36m>[31m
+          [36m<svg[31m
+            [33mclass[31m=[32m"lucide lucide-arrow-left mr-1 h-4 w-4"[31m
+            [33mfill[31m=[32m"none"[31m
+            [33mheight[31m=[32m"24"[31m
+            [33mstroke[31m=[32m"currentColor"[31m
+            [33mstroke-linecap[31m=[32m"round"[31m
+            [33mstroke-linejoin[31m=[32m"round"[31m
+            [33mstroke-width[31m=[32m"2"[31m
+            [33mviewBox[31m=[32m"0 0 24 24"[31m
+            [33mwidth[31m=[32m"24"[31m
+            [33mxmlns[31m=[32m"http://www.w3.org/2000/svg"[31m
+          [36m>[31m
+            [36m<path[31m
+              [33md[31m=[32m"m12 19-7-7 7-7"[31m
+            [36m/>[31m
+            [36m<path[31m
+              [33md[31m=[32m"M19 12H5"[31m
+            [36m/>[31m
+          [36m</svg>[31m
+          [0mresults.list.title[0m
+        [36m</button>[31m
+      [36m</div>[31m
+      [36m<div[31m
+        [33mclass[31m=[32m"flex items-start justify-between gap-4"[31m
+      [36m>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"mb-6"[31m
+        [36m>[31m
+          [36m<h1[31m
+            [33mclass[31m=[32m"text-2xl font-bold tracking-tight text-foreground"[31m
+          [36m>[31m
+            [0mresults.detail.title[0m
+          [36m</h1>[31m
+          [36m<p[31m
+            [33mclass[31m=[32m"mt-1 text-sm text-muted-foreground"[31m
+          [36m>[31m
+            [0m31/12/2023, 21:00:00[0m
+          [36m</p>[31m
+        [36m</div>[31m
+      [36m</div>[31m
+      [36m<div[31m
+        [33mclass[31m=[32m"rounded-lg border border-border bg-card text-card-foreground shadow-xs p-4"[31m
+      [36m>[31m
+        [36m<p[31m
+          [33mclass[31m=[32m"mb-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground"[31m
+        [36m>[31m
+          [0mevaluations.detail.question[0m
+        [36m</p>[31m
+        [36m<p[31m
+          [33mclass[31m=[32m"text-sm leading-relaxed text-foreground"[31m
+        [36m>[31m
+          [0mWhat is the applicable standard of review?[0m
+        [36m</p>[31m
+      [36m</div>[31m
+      [36m<div[31m
+        [33mclass[31m=[32m"space-y-6"[31m
+      [36m>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"rounded-lg border bg-card text-card-foreground shadow-xs border-primary/30 bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 p-6"[31m
+        [36m>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"flex items-start gap-4"[31m
+          [36m>[31m
+            [36m<div[31m
+              [33mclass[31m=[32m"rounded-xl bg-primary/10 p-3"[31m
+            [36m>[31m
+              [36m<svg[31m
+                [33mclass[31m=[32m"lucide lucide-trophy h-7 w-7 text-primary"[31m
+                [33mfill[31m=[32m"none"[31m
+                [33mheight[31m=[32m"24"[31m
+                [33mstroke[31m=[32m"currentColor"[31m
+                [33mstroke-linecap[31m=[32m"round"[31m
+                [33mstroke-linejoin[31m=[32m"round"[31m
+                [33mstroke-width[31m=[32m"2"[31m
+                [33mviewBox[31m=[32m"0 0 24 24"[31m
+                [33mwidth[31m=[32m"24"[31m
+                [33mxmlns[31m=[32m"http://www.w3.org/2000/svg"[31m
+              [36m>[31m
+                [36m<path[31m
+                  [33md[31m=[32m"M6 9H4.5a2.5 2.5 0 0 1 0-5H6"[31m
+                [36m/>[31m
+                [36m<path[31m
+                  [33md[31m=[32m"M18 9h1.5a2.5 2.5 0 0 0 0-5H18"[31m
+                [36m/>[31m
+                [36m<path[31m
+                  [33md[31m=[32m"M4 22h16"[31m
+                [36m/>[31m
+                [36m<path[31m
+                  [33md[31m=[32m"M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"[31m
+                [36m/>[31m
+                [36m<path[31m
+                  [33md[31m=[32m"M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"[31m
+                [36m/>[31m
+                [36m<path[31m
+                  [33md[31m=[32m"M18 2H6v7a6 6 0 0 0 12 0V2Z"[31m
+                [36m/>[31m
+              [36m</svg>[31m
+            [36m</div>[31m
+            [36m<div[31m
+              [33mclass[31m=[32m"flex-1"[31m
+            [36m>[31m
+              [36m<p[31m
+                [33mclass[31m=[32m"mb-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground"[31m
+              [36m>[31m
+                [0mresults.winner.label[0m
+              [36m</p>[31m
+              [36m<p[31m
+                [33mclass[31m=[32m"text-2xl font-bold text-foreground"[31m
+              [36m>[31m
+                [0mLiquidAI/LFM2-24B-A2B[0m
+              [36m</p>[31m
+              [36m<p[31m
+                [33mclass[31m=[32m"mt-1 text-sm text-muted-foreground"[31m
+              [36m>[31m
+                [0m31% share in winning Cluster 0[0m
+              [36m</p>[31m
+            [36m</div>[31m
+            [36m<div[31m
+              [33mclass[31m=[32m"text-right"[31m
+            [36m>[31m
+              [36m<p[31m
+                [33mclass[31m=[32m"text-xs font-semibold uppercase tracking-wider text-muted-foreground"[31m
+              [36m>[31m
+                [0mresults.winner.clusterScore[0m
+              [36m</p>[31m
+              [36m<p[31m
+                [33mclass[31m=[32m"text-3xl font-bold text-primary"[31m
+              [36m>[31m
+                [0m85[0m
+                [36m<span[31m
+                  [33mclass[31m=[32m"text-base font-normal text-muted-foreground"[31m
+                [36m>[31m
+                  [0m%[0m
+                [36m</span>[31m
+              [36m</p>[31m
+            [36m</div>[31m
+          [36m</div>[31m
+        [36m</div>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"grid gap-4 sm:grid-cols-3"[31m
+        [36m>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"rounded-lg border border-border bg-card text-card-foreground shadow-xs p-4"[31m
+          [36m>[31m
+            [36m<p[31m
+              [33mclass[31m=[32m"mb-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground"[31m
+            [36m>[31m
+              [0mresults.stats.clusters[0m
+            [36m<...[39m
+ [31m├ù[39m tests/components/analysis/ResultsPage.test.tsx[2m > [22mResultsPage[2m > [22mshows winner banner with correct model[33m 1015[2mms[22m[39m
+[31m   ÔåÆ Found multiple elements with the text: LiquidAI/LFM2-24B-A2B
+
+Here are the matching elements:
+
+Ignored nodes: comments, script, style
+[36m<p[31m
+  [33mclass[31m=[32m"text-2xl font-bold text-foreground"[31m
+[36m>[31m
+  [0mLiquidAI/LFM2-24B-A2B[0m
+[36m</p>[31m
+
+Ignored nodes: comments, script, style
+[36m<span[31m
+  [33mclass[31m=[32m"rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground"[31m
+[36m>[31m
+  [0mLiquidAI/LFM2-24B-A2B[0m
+[36m</span>[31m
+
+Ignored nodes: comments, script, style
+[36m<p[31m
+  [33mclass[31m=[32m"truncate text-sm font-medium text-foreground"[31m
+[36m>[31m
+  [0mLiquidAI/LFM2-24B-A2B[0m
+[36m</p>[31m
+
+Ignored nodes: comments, script, style
+[36m<p[31m
+  [33mclass[31m=[32m"truncate text-sm font-medium text-foreground"[31m
+[36m>[31m
+  [0mLiquidAI/LFM2-24B-A2B[0m
+[36m</p>[31m
+
+Ignored nodes: comments, script, style
+[36m<p[31m
+  [33mclass[31m=[32m"truncate text-sm font-medium text-foreground"[31m
+[36m>[31m
+  [0mLiquidAI/LFM2-24B-A2B[0m
+[36m</p>[31m
+
+(If this is intentional, then use the `*AllBy*` variant of the query (like `queryAllByText`, `getAllByText`, or `findAllByText`)).
+
+Ignored nodes: comments, script, style
+[36m<body>[31m
+  [36m<div>[31m
+    [36m<div[31m
+      [33mclass[31m=[32m"space-y-6"[31m
+    [36m>[31m
+      [36m<div[31m
+        [33mclass[31m=[32m"flex items-center gap-3"[31m
+      [36m>[31m
+        [36m<button[31m
+          [33mclass[31m=[32m"inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 active:scale-[0.98] hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3"[31m
+        [36m>[31m
+          [36m<svg[31m
+            [33mclass[31m=[32m"lucide lucide-arrow-left mr-1 h-4 w-4"[31m
+            [33mfill[31m=[32m"none"[31m
+            [33mheight[31m=[32m"24"[31m
+            [33mstroke[31m=[32m"currentColor"[31m
+            [33mstroke-linecap[31m=[32m"round"[31m
+            [33mstroke-linejoin[31m=[32m"round"[31m
+            [33mstroke-width[31m=[32m"2"[31m
+            [33mviewBox[31m=[32m"0 0 24 24"[31m
+            [33mwidth[31m=[32m"24"[31m
+            [33mxmlns[31m=[32m"http://www.w3.org/2000/svg"[31m
+          [36m>[31m
+            [36m<path[31m
+              [33md[31m=[32m"m12 19-7-7 7-7"[31m
+            [36m/>[31m
+            [36m<path[31m
+              [33md[31m=[32m"M19 12H5"[31m
+            [36m/>[31m
+          [36m</svg>[31m
+          [0mresults.list.title[0m
+        [36m</button>[31m
+      [36m</div>[31m
+      [36m<div[31m
+        [33mclass[31m=[32m"flex items-start justify-between gap-4"[31m
+      [36m>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"mb-6"[31m
+        [36m>[31m
+          [36m<h1[31m
+            [33mclass[31m=[32m"text-2xl font-bold tracking-tight text-foreground"[31m
+          [36m>[31m
+            [0mresults.detail.title[0m
+          [36m</h1>[31m
+          [36m<p[31m
+            [33mclass[31m=[32m"mt-1 text-sm text-muted-foreground"[31m
+          [36m>[31m
+            [0m31/12/2023, 21:00:00[0m
+          [36m</p>[31m
+        [36m</div>[31m
+      [36m</div>[31m
+      [36m<div[31m
+        [33mclass[31m=[32m"rounded-lg border border-border bg-card text-card-foreground shadow-xs p-4"[31m
+      [36m>[31m
+        [36m<p[31m
+          [33mclass[31m=[32m"mb-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground"[31m
+        [36m>[31m
+          [0mevaluations.detail.question[0m
+        [36m</p>[31m
+        [36m<p[31m
+          [33mclass[31m=[32m"text-sm leading-relaxed text-foreground"[31m
+        [36m>[31m
+          [0mWhat is the applicable standard of review?[0m
+        [36m</p>[31m
+      [36m</div>[31m
+      [36m<div[31m
+        [33mclass[31m=[32m"space-y-6"[31m
+      [36m>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"rounded-lg border bg-card text-card-foreground shadow-xs border-primary/30 bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 p-6"[31m
+        [36m>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"flex items-start gap-4"[31m
+          [36m>[31m
+            [36m<div[31m
+              [33mclass[31m=[32m"rounded-xl bg-primary/10 p-3"[31m
+            [36m>[31m
+              [36m<svg[31m
+                [33mclass[31m=[32m"lucide lucide-trophy h-7 w-7 text-primary"[31m
+                [33mfill[31m=[32m"none"[31m
+                [33mheight[31m=[32m"24"[31m
+                [33mstroke[31m=[32m"currentColor"[31m
+                [33mstroke-linecap[31m=[32m"round"[31m
+                [33mstroke-linejoin[31m=[32m"round"[31m
+                [33mstroke-width[31m=[32m"2"[31m
+                [33mviewBox[31m=[32m"0 0 24 24"[31m
+                [33mwidth[31m=[32m"24"[31m
+                [33mxmlns[31m=[32m"http://www.w3.org/2000/svg"[31m
+              [36m>[31m
+                [36m<path[31m
+                  [33md[31m=[32m"M6 9H4.5a2.5 2.5 0 0 1 0-5H6"[31m
+                [36m/>[31m
+                [36m<path[31m
+                  [33md[31m=[32m"M18 9h1.5a2.5 2.5 0 0 0 0-5H18"[31m
+                [36m/>[31m
+                [36m<path[31m
+                  [33md[31m=[32m"M4 22h16"[31m
+                [36m/>[31m
+                [36m<path[31m
+                  [33md[31m=[32m"M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"[31m
+                [36m/>[31m
+                [36m<path[31m
+                  [33md[31m=[32m"M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"[31m
+                [36m/>[31m
+                [36m<path[31m
+                  [33md[31m=[32m"M18 2H6v7a6 6 0 0 0 12 0V2Z"[31m
+                [36m/>[31m
+              [36m</svg>[31m
+            [36m</div>[31m
+            [36m<div[31m
+              [33mclass[31m=[32m"flex-1"[31m
+            [36m>[31m
+              [36m<p[31m
+                [33mclass[31m=[32m"mb-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground"[31m
+              [36m>[31m
+                [0mresults.winner.label[0m
+              [36m</p>[31m
+              [36m<p[31m
+                [33mclass[31m=[32m"text-2xl font-bold text-foreground"[31m
+              [36m>[31m
+                [0mLiquidAI/LFM2-24B-A2B[0m
+              [36m</p>[31m
+              [36m<p[31m
+                [33mclass[31m=[32m"mt-1 text-sm text-muted-foreground"[31m
+              [36m>[31m
+                [0m31% share in winning Cluster 0[0m
+              [36m</p>[31m
+            [36m</div>[31m
+            [36m<div[31m
+              [33mclass[31m=[32m"text-right"[31m
+            [36m>[31m
+              [36m<p[31m
+                [33mclass[31m=[32m"text-xs font-semibold uppercase tracking-wider text-muted-foreground"[31m
+              [36m>[31m
+                [0mresults.winner.clusterScore[0m
+              [36m</p>[31m
+              [36m<p[31m
+                [33mclass[31m=[32m"text-3xl font-bold text-primary"[31m
+              [36m>[31m
+                [0m85[0m
+                [36m<span[31m
+                  [33mclass[31m=[32m"text-base font-normal text-muted-foreground"[31m
+                [36m>[31m
+                  [0m%[0m
+                [36m</span>[31m
+              [36m</p>[31m
+            [36m</div>[31m
+          [36m</div>[31m
+        [36m</div>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"grid gap-4 sm:grid-cols-3"[31m
+        [36m>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"rounded-lg border border-border bg-card text-card-foreground shadow-xs p-4"[31m
+          [36m>[31m
+            [36m<p[31m
+              [33mclass[31m=[32m"mb-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground"[31m
+            [36m>[31m
+              [0mresults.stats.clusters[0m
+            [36m<...
+
+Ignored nodes: comments, script, style
+[36m<html>[31m
+  [36m<head />[31m
+  [36m<body>[31m
+    [36m<div>[31m
+      [36m<div[31m
+        [33mclass[31m=[32m"space-y-6"[31m
+      [36m>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"flex items-center gap-3"[31m
+        [36m>[31m
+          [36m<button[31m
+            [33mclass[31m=[32m"inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 active:scale-[0.98] hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3"[31m
+          [36m>[31m
+            [36m<svg[31m
+              [33mclass[31m=[32m"lucide lucide-arrow-left mr-1 h-4 w-4"[31m
+              [33mfill[31m=[32m"none"[31m
+              [33mheight[31m=[32m"24"[31m
+              [33mstroke[31m=[32m"currentColor"[31m
+              [33mstroke-linecap[31m=[32m"round"[31m
+              [33mstroke-linejoin[31m=[32m"round"[31m
+              [33mstroke-width[31m=[32m"2"[31m
+              [33mviewBox[31m=[32m"0 0 24 24"[31m
+              [33mwidth[31m=[32m"24"[31m
+              [33mxmlns[31m=[32m"http://www.w3.org/2000/svg"[31m
+            [36m>[31m
+              [36m<path[31m
+                [33md[31m=[32m"m12 19-7-7 7-7"[31m
+              [36m/>[31m
+              [36m<path[31m
+                [33md[31m=[32m"M19 12H5"[31m
+              [36m/>[31m
+            [36m</svg>[31m
+            [0mresults.list.title[0m
+          [36m</button>[31m
+        [36m</div>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"flex items-start justify-between gap-4"[31m
+        [36m>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"mb-6"[31m
+          [36m>[31m
+            [36m<h1[31m
+              [33mclass[31m=[32m"text-2xl font-bold tracking-tight text-foreground"[31m
+            [36m>[31m
+              [0mresults.detail.title[0m
+            [36m</h1>[31m
+            [36m<p[31m
+              [33mclass[31m=[32m"mt-1 text-sm text-muted-foreground"[31m
+            [36m>[31m
+              [0m31/12/2023, 21:00:00[0m
+            [36m</p>[31m
+          [36m</div>[31m
+        [36m</div>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"rounded-lg border border-border bg-card text-card-foreground shadow-xs p-4"[31m
+        [36m>[31m
+          [36m<p[31m
+            [33mclass[31m=[32m"mb-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground"[31m
+          [36m>[31m
+            [0mevaluations.detail.question[0m
+          [36m</p>[31m
+          [36m<p[31m
+            [33mclass[31m=[32m"text-sm leading-relaxed text-foreground"[31m
+          [36m>[31m
+            [0mWhat is the applicable standard of review?[0m
+          [36m</p>[31m
+        [36m</div>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"space-y-6"[31m
+        [36m>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"rounded-lg border bg-card text-card-foreground shadow-xs border-primary/30 bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 p-6"[31m
+          [36m>[31m
+            [36m<div[31m
+              [33mclass[31m=[32m"flex items-start gap-4"[31m
+            [36m>[31m
+              [36m<div[31m
+                [33mclass[31m=[32m"rounded-xl bg-primary/10 p-3"[31m
+              [36m>[31m
+                [36m<svg[31m
+                  [33mclass[31m=[32m"lucide lucide-trophy h-7 w-7 text-primary"[31m
+                  [33mfill[31m=[32m"none"[31m
+                  [33mheight[31m=[32m"24"[31m
+                  [33mstroke[31m=[32m"currentColor"[31m
+                  [33mstroke-linecap[31m=[32m"round"[31m
+                  [33mstroke-linejoin[31m=[32m"round"[31m
+                  [33mstroke-width[31m=[32m"2"[31m
+                  [33mviewBox[31m=[32m"0 0 24 24"[31m
+                  [33mwidth[31m=[32m"24"[31m
+                  [33mxmlns[31m=[32m"http://www.w3.org/2000/svg"[31m
+                [36m>[31m
+                  [36m<path[31m
+                    [33md[31m=[32m"M6 9H4.5a2.5 2.5 0 0 1 0-5H6"[31m
+                  [36m/>[31m
+                  [36m<path[31m
+                    [33md[31m=[32m"M18 9h1.5a2.5 2.5 0 0 0 0-5H18"[31m
+                  [36m/>[31m
+                  [36m<path[31m
+                    [33md[31m=[32m"M4 22h16"[31m
+                  [36m/>[31m
+                  [36m<path[31m
+                    [33md[31m=[32m"M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"[31m
+                  [36m/>[31m
+                  [36m<path[31m
+                    [33md[31m=[32m"M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"[31m
+                  [36m/>[31m
+                  [36m<path[31m
+                    [33md[31m=[32m"M18 2H6v7a6 6 0 0 0 12 0V2Z"[31m
+                  [36m/>[31m
+                [36m</svg>[31m
+              [36m</div>[31m
+              [36m<div[31m
+                [33mclass[31m=[32m"flex-1"[31m
+              [36m>[31m
+                [36m<p[31m
+                  [33mclass[31m=[32m"mb-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground"[31m
+                [36m>[31m
+                  [0mresults.winner.label[0m
+                [36m</p>[31m
+                [36m<p[31m
+                  [33mclass[31m=[32m"text-2xl font-bold text-foreground"[31m
+                [36m>[31m
+                  [0mLiquidAI/LFM2-24B-A2B[0m
+                [36m</p>[31m
+                [36m<p[31m
+                  [33mclass[31m=[32m"mt-1 text-sm text-muted-foreground"[31m
+                [36m>[31m
+                  [0m31% share in winning Cluster 0[0m
+                [36m</p>[31m
+              [36m</div>[31m
+              [36m<div[31m
+                [33mclass[31m=[32m"text-right"[31m
+              [36m>[31m
+                [36m<p[31m
+                  [33mclass[31m=[32m"text-xs font-semibold uppercase tracking-wider text-muted-foreground"[31m
+                [36m>[31m
+                  [0mresults.winner.clusterScore[0m
+                [36m</p>[31m
+                [36m<p[31m
+                  [33mclass[31m=[32m"text-3xl font-bold text-primary"[31m
+                [36m>[31m
+                  [0m85[0m
+                  [36m<span[31m
+                    [33mclass[31m=[32m"text-base font-normal text-muted-foreground"[31m
+                  [36m>[31m
+                    [0m%[0m
+                  [36m</span>[31m
+                [36m</p>[31m
+              [36m</div>[31m
+            [36m</div>[31m
+          [36m</div>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"grid gap-4 sm:grid-cols-3"[31m
+          [36m>[31m
+            [36m<div[31m
+              [33mcl...[39m
+ [31m├ù[39m tests/components/analysis/ResultsPage.test.tsx[2m > [22mResultsPage[2m > [22mcalls runAnalysis and shows results on Run Analysis click[33m 1145[2mms[22m[39m
+[31m   ÔåÆ Found multiple elements with the text: LiquidAI/LFM2-24B-A2B
+
+Here are the matching elements:
+
+Ignored nodes: comments, script, style
+[36m<p[31m
+  [33mclass[31m=[32m"text-2xl font-bold text-foreground"[31m
+[36m>[31m
+  [0mLiquidAI/LFM2-24B-A2B[0m
+[36m</p>[31m
+
+Ignored nodes: comments, script, style
+[36m<span[31m
+  [33mclass[31m=[32m"rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground"[31m
+[36m>[31m
+  [0mLiquidAI/LFM2-24B-A2B[0m
+[36m</span>[31m
+
+Ignored nodes: comments, script, style
+[36m<p[31m
+  [33mclass[31m=[32m"truncate text-sm font-medium text-foreground"[31m
+[36m>[31m
+  [0mLiquidAI/LFM2-24B-A2B[0m
+[36m</p>[31m
+
+Ignored nodes: comments, script, style
+[36m<p[31m
+  [33mclass[31m=[32m"truncate text-sm font-medium text-foreground"[31m
+[36m>[31m
+  [0mLiquidAI/LFM2-24B-A2B[0m
+[36m</p>[31m
+
+Ignored nodes: comments, script, style
+[36m<p[31m
+  [33mclass[31m=[32m"truncate text-sm font-medium text-foreground"[31m
+[36m>[31m
+  [0mLiquidAI/LFM2-24B-A2B[0m
+[36m</p>[31m
+
+(If this is intentional, then use the `*AllBy*` variant of the query (like `queryAllByText`, `getAllByText`, or `findAllByText`)).
+
+Ignored nodes: comments, script, style
+[36m<body>[31m
+  [36m<div>[31m
+    [36m<div[31m
+      [33mclass[31m=[32m"space-y-6"[31m
+    [36m>[31m
+      [36m<div[31m
+        [33mclass[31m=[32m"flex items-center gap-3"[31m
+      [36m>[31m
+        [36m<button[31m
+          [33mclass[31m=[32m"inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 active:scale-[0.98] hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3"[31m
+        [36m>[31m
+          [36m<svg[31m
+            [33mclass[31m=[32m"lucide lucide-arrow-left mr-1 h-4 w-4"[31m
+            [33mfill[31m=[32m"none"[31m
+            [33mheight[31m=[32m"24"[31m
+            [33mstroke[31m=[32m"currentColor"[31m
+            [33mstroke-linecap[31m=[32m"round"[31m
+            [33mstroke-linejoin[31m=[32m"round"[31m
+            [33mstroke-width[31m=[32m"2"[31m
+            [33mviewBox[31m=[32m"0 0 24 24"[31m
+            [33mwidth[31m=[32m"24"[31m
+            [33mxmlns[31m=[32m"http://www.w3.org/2000/svg"[31m
+          [36m>[31m
+            [36m<path[31m
+              [33md[31m=[32m"m12 19-7-7 7-7"[31m
+            [36m/>[31m
+            [36m<path[31m
+              [33md[31m=[32m"M19 12H5"[31m
+            [36m/>[31m
+          [36m</svg>[31m
+          [0mresults.list.title[0m
+        [36m</button>[31m
+      [36m</div>[31m
+      [36m<div[31m
+        [33mclass[31m=[32m"flex items-start justify-between gap-4"[31m
+      [36m>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"mb-6"[31m
+        [36m>[31m
+          [36m<h1[31m
+            [33mclass[31m=[32m"text-2xl font-bold tracking-tight text-foreground"[31m
+          [36m>[31m
+            [0mresults.detail.title[0m
+          [36m</h1>[31m
+          [36m<p[31m
+            [33mclass[31m=[32m"mt-1 text-sm text-muted-foreground"[31m
+          [36m>[31m
+            [0m31/12/2023, 21:00:00[0m
+          [36m</p>[31m
+        [36m</div>[31m
+      [36m</div>[31m
+      [36m<div[31m
+        [33mclass[31m=[32m"rounded-lg border border-border bg-card text-card-foreground shadow-xs p-4"[31m
+      [36m>[31m
+        [36m<p[31m
+          [33mclass[31m=[32m"mb-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground"[31m
+        [36m>[31m
+          [0mevaluations.detail.question[0m
+        [36m</p>[31m
+        [36m<p[31m
+          [33mclass[31m=[32m"text-sm leading-relaxed text-foreground"[31m
+        [36m>[31m
+          [0mWhat is the applicable standard of review?[0m
+        [36m</p>[31m
+      [36m</div>[31m
+      [36m<div[31m
+        [33mclass[31m=[32m"space-y-6"[31m
+      [36m>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"rounded-lg border bg-card text-card-foreground shadow-xs border-primary/30 bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 p-6"[31m
+        [36m>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"flex items-start gap-4"[31m
+          [36m>[31m
+            [36m<div[31m
+              [33mclass[31m=[32m"rounded-xl bg-primary/10 p-3"[31m
+            [36m>[31m
+              [36m<svg[31m
+                [33mclass[31m=[32m"lucide lucide-trophy h-7 w-7 text-primary"[31m
+                [33mfill[31m=[32m"none"[31m
+                [33mheight[31m=[32m"24"[31m
+                [33mstroke[31m=[32m"currentColor"[31m
+                [33mstroke-linecap[31m=[32m"round"[31m
+                [33mstroke-linejoin[31m=[32m"round"[31m
+                [33mstroke-width[31m=[32m"2"[31m
+                [33mviewBox[31m=[32m"0 0 24 24"[31m
+                [33mwidth[31m=[32m"24"[31m
+                [33mxmlns[31m=[32m"http://www.w3.org/2000/svg"[31m
+              [36m>[31m
+                [36m<path[31m
+                  [33md[31m=[32m"M6 9H4.5a2.5 2.5 0 0 1 0-5H6"[31m
+                [36m/>[31m
+                [36m<path[31m
+                  [33md[31m=[32m"M18 9h1.5a2.5 2.5 0 0 0 0-5H18"[31m
+                [36m/>[31m
+                [36m<path[31m
+                  [33md[31m=[32m"M4 22h16"[31m
+                [36m/>[31m
+                [36m<path[31m
+                  [33md[31m=[32m"M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"[31m
+                [36m/>[31m
+                [36m<path[31m
+                  [33md[31m=[32m"M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"[31m
+                [36m/>[31m
+                [36m<path[31m
+                  [33md[31m=[32m"M18 2H6v7a6 6 0 0 0 12 0V2Z"[31m
+                [36m/>[31m
+              [36m</svg>[31m
+            [36m</div>[31m
+            [36m<div[31m
+              [33mclass[31m=[32m"flex-1"[31m
+            [36m>[31m
+              [36m<p[31m
+                [33mclass[31m=[32m"mb-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground"[31m
+              [36m>[31m
+                [0mresults.winner.label[0m
+              [36m</p>[31m
+              [36m<p[31m
+                [33mclass[31m=[32m"text-2xl font-bold text-foreground"[31m
+              [36m>[31m
+                [0mLiquidAI/LFM2-24B-A2B[0m
+              [36m</p>[31m
+              [36m<p[31m
+                [33mclass[31m=[32m"mt-1 text-sm text-muted-foreground"[31m
+              [36m>[31m
+                [0m31% share in winning Cluster 0[0m
+              [36m</p>[31m
+            [36m</div>[31m
+            [36m<div[31m
+              [33mclass[31m=[32m"text-right"[31m
+            [36m>[31m
+              [36m<p[31m
+                [33mclass[31m=[32m"text-xs font-semibold uppercase tracking-wider text-muted-foreground"[31m
+              [36m>[31m
+                [0mresults.winner.clusterScore[0m
+              [36m</p>[31m
+              [36m<p[31m
+                [33mclass[31m=[32m"text-3xl font-bold text-primary"[31m
+              [36m>[31m
+                [0m85[0m
+                [36m<span[31m
+                  [33mclass[31m=[32m"text-base font-normal text-muted-foreground"[31m
+                [36m>[31m
+                  [0m%[0m
+                [36m</span>[31m
+              [36m</p>[31m
+            [36m</div>[31m
+          [36m</div>[31m
+        [36m</div>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"grid gap-4 sm:grid-cols-3"[31m
+        [36m>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"rounded-lg border border-border bg-card text-card-foreground shadow-xs p-4"[31m
+          [36m>[31m
+            [36m<p[31m
+              [33mclass[31m=[32m"mb-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground"[31m
+            [36m>[31m
+              [0mresults.stats.clusters[0m
+            [36m<...
+
+Ignored nodes: comments, script, style
+[36m<html>[31m
+  [36m<head />[31m
+  [36m<body>[31m
+    [36m<div>[31m
+      [36m<div[31m
+        [33mclass[31m=[32m"space-y-6"[31m
+      [36m>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"flex items-center gap-3"[31m
+        [36m>[31m
+          [36m<button[31m
+            [33mclass[31m=[32m"inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 active:scale-[0.98] hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3"[31m
+          [36m>[31m
+            [36m<svg[31m
+              [33mclass[31m=[32m"lucide lucide-arrow-left mr-1 h-4 w-4"[31m
+              [33mfill[31m=[32m"none"[31m
+              [33mheight[31m=[32m"24"[31m
+              [33mstroke[31m=[32m"currentColor"[31m
+              [33mstroke-linecap[31m=[32m"round"[31m
+              [33mstroke-linejoin[31m=[32m"round"[31m
+              [33mstroke-width[31m=[32m"2"[31m
+              [33mviewBox[31m=[32m"0 0 24 24"[31m
+              [33mwidth[31m=[32m"24"[31m
+              [33mxmlns[31m=[32m"http://www.w3.org/2000/svg"[31m
+            [36m>[31m
+              [36m<path[31m
+                [33md[31m=[32m"m12 19-7-7 7-7"[31m
+              [36m/>[31m
+              [36m<path[31m
+                [33md[31m=[32m"M19 12H5"[31m
+              [36m/>[31m
+            [36m</svg>[31m
+            [0mresults.list.title[0m
+          [36m</button>[31m
+        [36m</div>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"flex items-start justify-between gap-4"[31m
+        [36m>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"mb-6"[31m
+          [36m>[31m
+            [36m<h1[31m
+              [33mclass[31m=[32m"text-2xl font-bold tracking-tight text-foreground"[31m
+            [36m>[31m
+              [0mresults.detail.title[0m
+            [36m</h1>[31m
+            [36m<p[31m
+              [33mclass[31m=[32m"mt-1 text-sm text-muted-foreground"[31m
+            [36m>[31m
+              [0m31/12/2023, 21:00:00[0m
+            [36m</p>[31m
+          [36m</div>[31m
+        [36m</div>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"rounded-lg border border-border bg-card text-card-foreground shadow-xs p-4"[31m
+        [36m>[31m
+          [36m<p[31m
+            [33mclass[31m=[32m"mb-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground"[31m
+          [36m>[31m
+            [0mevaluations.detail.question[0m
+          [36m</p>[31m
+          [36m<p[31m
+            [33mclass[31m=[32m"text-sm leading-relaxed text-foreground"[31m
+          [36m>[31m
+            [0mWhat is the applicable standard of review?[0m
+          [36m</p>[31m
+        [36m</div>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"space-y-6"[31m
+        [36m>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"rounded-lg border bg-card text-card-foreground shadow-xs border-primary/30 bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 p-6"[31m
+          [36m>[31m
+            [36m<div[31m
+              [33mclass[31m=[32m"flex items-start gap-4"[31m
+            [36m>[31m
+              [36m<div[31m
+                [33mclass[31m=[32m"rounded-xl bg-primary/10 p-3"[31m
+              [36m>[31m
+                [36m<svg[31m
+                  [33mclass[31m=[32m"lucide lucide-trophy h-7 w-7 text-primary"[31m
+                  [33mfill[31m=[32m"none"[31m
+                  [33mheight[31m=[32m"24"[31m
+                  [33mstroke[31m=[32m"currentColor"[31m
+                  [33mstroke-linecap[31m=[32m"round"[31m
+                  [33mstroke-linejoin[31m=[32m"round"[31m
+                  [33mstroke-width[31m=[32m"2"[31m
+                  [33mviewBox[31m=[32m"0 0 24 24"[31m
+                  [33mwidth[31m=[32m"24"[31m
+                  [33mxmlns[31m=[32m"http://www.w3.org/2000/svg"[31m
+                [36m>[31m
+                  [36m<path[31m
+                    [33md[31m=[32m"M6 9H4.5a2.5 2.5 0 0 1 0-5H6"[31m
+                  [36m/>[31m
+                  [36m<path[31m
+                    [33md[31m=[32m"M18 9h1.5a2.5 2.5 0 0 0 0-5H18"[31m
+                  [36m/>[31m
+                  [36m<path[31m
+                    [33md[31m=[32m"M4 22h16"[31m
+                  [36m/>[31m
+                  [36m<path[31m
+                    [33md[31m=[32m"M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"[31m
+                  [36m/>[31m
+                  [36m<path[31m
+                    [33md[31m=[32m"M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"[31m
+                  [36m/>[31m
+                  [36m<path[31m
+                    [33md[31m=[32m"M18 2H6v7a6 6 0 0 0 12 0V2Z"[31m
+                  [36m/>[31m
+                [36m</svg>[31m
+              [36m</div>[31m
+              [36m<div[31m
+                [33mclass[31m=[32m"flex-1"[31m
+              [36m>[31m
+                [36m<p[31m
+                  [33mclass[31m=[32m"mb-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground"[31m
+                [36m>[31m
+                  [0mresults.winner.label[0m
+                [36m</p>[31m
+                [36m<p[31m
+                  [33mclass[31m=[32m"text-2xl font-bold text-foreground"[31m
+                [36m>[31m
+                  [0mLiquidAI/LFM2-24B-A2B[0m
+                [36m</p>[31m
+                [36m<p[31m
+                  [33mclass[31m=[32m"mt-1 text-sm text-muted-foreground"[31m
+                [36m>[31m
+                  [0m31% share in winning Cluster 0[0m
+                [36m</p>[31m
+              [36m</div>[31m
+              [36m<div[31m
+                [33mclass[31m=[32m"text-right"[31m
+              [36m>[31m
+                [36m<p[31m
+                  [33mclass[31m=[32m"text-xs font-semibold uppercase tracking-wider text-muted-foreground"[31m
+                [36m>[31m
+                  [0mresults.winner.clusterScore[0m
+                [36m</p>[31m
+                [36m<p[31m
+                  [33mclass[31m=[32m"text-3xl font-bold text-primary"[31m
+                [36m>[31m
+                  [0m85[0m
+                  [36m<span[31m
+                    [33mclass[31m=[32m"text-base font-normal text-muted-foreground"[31m
+                  [36m>[31m
+                    [0m%[0m
+                  [36m</span>[31m
+                [36m</p>[31m
+              [36m</div>[31m
+            [36m</div>[31m
+          [36m</div>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"grid gap-4 sm:grid-cols-3"[31m
+          [36m>[31m
+            [36m<div[31m
+              [33mcl...[39m
+ [32mÔ£ô[39m tests/components/analysis/ResultsPage.test.tsx[2m > [22mResultsPage[2m > [22mshows error when runAnalysis fails
+ [32mÔ£ô[39m tests/components/analysis/ResultsPage.test.tsx[2m > [22mResultsPage[2m > [22mrenders all cluster centroid cards sorted by score
+ [32mÔ£ô[39m tests/components/analysis/ResultsPage.test.tsx[2m > [22mResultsPage[2m > [22mfetches rubric alongside analysis on load
+ [32mÔ£ô[39m tests/components/analysis/ResultsPage.test.tsx[2m > [22mResultsPage[2m > [22mrenders rubric section when rubric is available
+ [32mÔ£ô[39m tests/components/analysis/ResultsPage.test.tsx[2m > [22mResultsPage[2m > [22mrenders weighting comparison table
+ [32mÔ£ô[39m tests/components/analysis/ResultsPage.test.tsx[2m > [22mResultsPage[2m > [22mrenders silhouette chart
+ [32mÔ£ô[39m tests/components/analysis/ResultsPage.test.tsx[2m > [22mResultsPage[2m > [22mrenders criterion heatmap when rubric criteria available
+ [32mÔ£ô[39m tests/components/analysis/ResultsPage.test.tsx[2m > [22mResultsPage[2m > [22mrenders conditioning sample panel when rubric available
+ [32mÔ£ô[39m tests/components/analysis/ResultsPage.test.tsx[2m > [22mResultsPage[2m > [22mrenders evaluated models pill list
+ [32mÔ£ô[39m tests/components/analysis/ResultsPage.test.tsx[2m > [22mResultsPage[2m > [22mrenders gracefully when rubric fetch fails
+
+[31mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[1m[7m Failed Tests 3 
+[27m[22mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+tests/components/analysis/ResultsPage.test.tsx[2m > [22mResultsPage[2m > 
+[22mrenders results dashboard when analysis exists
+[31m[1mTestingLibraryElementError[22m[39m: Found multiple elements with 
+the text: LiquidAI/LFM2-24B-A2B
+
+Here are the matching elements:
+
+Ignored nodes: comments, script, style
+[36m<p[39m
+  [33mclass[39m=[32m"text-2xl font-bold text-foreground"[39m
+[36m>[39m
+  [0mLiquidAI/LFM2-24B-A2B[0m
+[36m</p>[39m
+
+Ignored nodes: comments, script, style
+[36m<span[39m
+  [33mclass[39m=[32m"rounded-full bg-muted px-3 py-1 text-xs font-medium 
+text-muted-foreground"[39m
+[36m>[39m
+  [0mLiquidAI/LFM2-24B-A2B[0m
+[36m</span>[39m
+
+Ignored nodes: comments, script, style
+[36m<p[39m
+  [33mclass[39m=[32m"truncate text-sm font-medium text-foreground"[39m
+[36m>[39m
+  [0mLiquidAI/LFM2-24B-A2B[0m
+[36m</p>[39m
+
+Ignored nodes: comments, script, style
+[36m<p[39m
+  [33mclass[39m=[32m"truncate text-sm font-medium text-foreground"[39m
+[36m>[39m
+  [0mLiquidAI/LFM2-24B-A2B[0m
+[36m</p>[39m
+
+Ignored nodes: comments, script, style
+[36m<p[39m
+  [33mclass[39m=[32m"truncate text-sm font-medium text-foreground"[39m
+[36m>[39m
+  [0mLiquidAI/LFM2-24B-A2B[0m
+[36m</p>[39m
+
+(If this is intentional, then use the `*AllBy*` variant of the query (like 
+`queryAllByText`, `getAllByText`, or `findAllByText`)).
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"space-y-6"[39m
+    [36m>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"flex items-center gap-3"[39m
+      [36m>[39m
+        [36m<button[39m
+          [33mclass[39m=[32m"inline-flex items-center justify-center 
+whitespace-nowrap text-sm font-medium ring-offset-background transition-all 
+duration-150 focus-visible:outline-none focus-visible:ring-2 
+focus-visible:ring-ring focus-visible:ring-offset-2 
+disabled:pointer-events-none disabled:opacity-50 active:scale-[0.98] 
+hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3"[39m
+        [36m>[39m
+          [36m<svg[39m
+            [33mclass[39m=[32m"lucide lucide-arrow-left mr-1 h-4 w-4"[39m
+            [33mfill[39m=[32m"none"[39m
+            [33mheight[39m=[32m"24"[39m
+            [33mstroke[39m=[32m"currentColor"[39m
+            [33mstroke-linecap[39m=[32m"round"[39m
+            [33mstroke-linejoin[39m=[32m"round"[39m
+            [33mstroke-width[39m=[32m"2"[39m
+            [33mviewBox[39m=[32m"0 0 24 24"[39m
+            [33mwidth[39m=[32m"24"[39m
+            [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+          [36m>[39m
+            [36m<path[39m
+              [33md[39m=[32m"m12 19-7-7 7-7"[39m
+            [36m/>[39m
+            [36m<path[39m
+              [33md[39m=[32m"M19 12H5"[39m
+            [36m/>[39m
+          [36m</svg>[39m
+          [0mresults.list.title[0m
+        [36m</button>[39m
+      [36m</div>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"flex items-start justify-between gap-4"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"mb-6"[39m
+        [36m>[39m
+          [36m<h1[39m
+            [33mclass[39m=[32m"text-2xl font-bold tracking-tight 
+text-foreground"[39m
+          [36m>[39m
+            [0mresults.detail.title[0m
+          [36m</h1>[39m
+          [36m<p[39m
+            [33mclass[39m=[32m"mt-1 text-sm text-muted-foreground"[39m
+          [36m>[39m
+            [0m31/12/2023, 21:00:00[0m
+          [36m</p>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"rounded-lg border border-border bg-card 
+text-card-foreground shadow-xs p-4"[39m
+      [36m>[39m
+        [36m<p[39m
+          [33mclass[39m=[32m"mb-1 text-xs font-semibold uppercase 
+tracking-wider text-muted-foreground"[39m
+        [36m>[39m
+          [0mevaluations.detail.question[0m
+        [36m</p>[39m
+        [36m<p[39m
+          [33mclass[39m=[32m"text-sm leading-relaxed text-foreground"[39m
+        [36m>[39m
+          [0mWhat is the applicable standard of review?[0m
+        [36m</p>[39m
+      [36m</div>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"space-y-6"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"rounded-lg border bg-card text-card-foreground 
+shadow-xs border-primary/30 bg-gradient-to-r from-primary/5 via-primary/10 
+to-primary/5 p-6"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"flex items-start gap-4"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"rounded-xl bg-primary/10 p-3"[39m
+            [36m>[39m
+              [36m<svg[39m
+                [33mclass[39m=[32m"lucide lucide-trophy h-7 w-7 
+text-primary"[39m
+                [33mfill[39m=[32m"none"[39m
+                [33mheight[39m=[32m"24"[39m
+                [33mstroke[39m=[32m"currentColor"[39m
+                [33mstroke-linecap[39m=[32m"round"[39m
+                [33mstroke-linejoin[39m=[32m"round"[39m
+                [33mstroke-width[39m=[32m"2"[39m
+                [33mviewBox[39m=[32m"0 0 24 24"[39m
+                [33mwidth[39m=[32m"24"[39m
+                [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+              [36m>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"M6 9H4.5a2.5 2.5 0 0 1 0-5H6"[39m
+                [36m/>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"M18 9h1.5a2.5 2.5 0 0 0 0-5H18"[39m
+                [36m/>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"M4 22h16"[39m
+                [36m/>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 
+18.75 7 20.24 7 22"[39m
+                [36m/>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"M14 14.66V17c0 .55.47.98.97 1.21C16.15 
+18.75 17 20.24 17 22"[39m
+                [36m/>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"M18 2H6v7a6 6 0 0 0 12 0V2Z"[39m
+                [36m/>[39m
+              [36m</svg>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"flex-1"[39m
+            [36m>[39m
+              [36m<p[39m
+                [33mclass[39m=[32m"mb-1 text-xs font-semibold uppercase 
+tracking-wider text-muted-foreground"[39m
+              [36m>[39m
+                [0mresults.winner.label[0m
+              [36m</p>[39m
+              [36m<p[39m
+                [33mclass[39m=[32m"text-2xl font-bold text-foreground"[39m
+              [36m>[39m
+                [0mLiquidAI/LFM2-24B-A2B[0m
+              [36m</p>[39m
+              [36m<p[39m
+                [33mclass[39m=[32m"mt-1 text-sm text-muted-foreground"[39m
+              [36m>[39m
+                [0m31% share in winning Cluster 0[0m
+              [36m</p>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"text-right"[39m
+            [36m>[39m
+              [36m<p[39m
+                [33mclass[39m=[32m"text-xs font-semibold uppercase 
+tracking-wider text-muted-foreground"[39m
+              [36m>[39m
+                [0mresults.winner.clusterScore[0m
+              [36m</p>[39m
+              [36m<p[39m
+                [33mclass[39m=[32m"text-3xl font-bold text-primary"[39m
+              [36m>[39m
+                [0m85[0m
+                [36m<span[39m
+                  [33mclass[39m=[32m"text-base font-normal 
+text-muted-foreground"[39m
+                [36m>[39m
+                  [0m%[0m
+                [36m</span>[39m
+              [36m</p>[39m
+            [36m</div>[39m
+          [36m</div>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"grid gap-4 sm:grid-cols-3"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"rounded-lg border border-border bg-card 
+text-card-foreground shadow-xs p-4"[39m
+          [36m>[39m
+            [36m<p[39m
+              [33mclass[39m=[32m"mb-1 text-xs font-semibold uppercase 
+tracking-wider text-muted-foreground"[39m
+            [36m>[39m
+              [0mresults.stats.clusters[0m
+            [36m<...
+[90m [2mÔØ»[22m Object.getElementError 
+node_modules/@testing-library/dom/dist/config.js:[2m37:19[22m[39m
+[90m [2mÔØ»[22m getElementError 
+node_modules/@testing-library/dom/dist/query-helpers.js:[2m20:35[22m[39m
+[90m [2mÔØ»[22m getMultipleElementsFoundError 
+node_modules/@testing-library/dom/dist/query-helpers.js:[2m23:10[22m[39m
+[90m [2mÔØ»[22m 
+node_modules/@testing-library/dom/dist/query-helpers.js:[2m55:13[22m[39m
+[90m [2mÔØ»[22m 
+node_modules/@testing-library/dom/dist/query-helpers.js:[2m95:19[22m[39m
+[36m [2mÔØ»[22m 
+tests/components/analysis/ResultsPage.test.tsx:[2m184:19[22m[39m
+    [90m182| [39m      [34mexpect[39m(screen[33m.[39m[34mgetByText[39m(
+[32m"results.winner.label"[39m))[33m.[39m[34mtoBeInTheDocume[39mÔÇª
+    [90m183| [39m    })[33m;[39m
+    [90m184| [39m    [34mexpect[39m(screen[33m.[39m[34mgetByText[39m([
+32m"LiquidAI/LFM2-24B-A2B"[39m))[33m.[39m[34mtoBeInTheDocumen[39mÔÇª
+    [90m   | [39m                  [31m^[39m
+    [90m185| [39m    [34mexpect[39m(screen[33m.[39m[34mgetByText[39m([
+32m"results.stats.clusters"[39m))[33m.[39m[34mtoBeInTheDocume[39mÔÇª
+    [90m186| [39m    [34mexpect[39m(screen[33m.[39m[34mgetByText[39m([
+32m"3"[39m))[33m.[39m[34mtoBeInTheDocument[39m()[33m;[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»Ô
+Ä»[1/3]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+tests/components/analysis/ResultsPage.test.tsx[2m > [22mResultsPage[2m > 
+[22mshows winner banner with correct model
+[31m[1mTestingLibraryElementError[22m[39m: Found multiple elements with 
+the text: LiquidAI/LFM2-24B-A2B
+
+Here are the matching elements:
+
+Ignored nodes: comments, script, style
+[36m<p[39m
+  [33mclass[39m=[32m"text-2xl font-bold text-foreground"[39m
+[36m>[39m
+  [0mLiquidAI/LFM2-24B-A2B[0m
+[36m</p>[39m
+
+Ignored nodes: comments, script, style
+[36m<span[39m
+  [33mclass[39m=[32m"rounded-full bg-muted px-3 py-1 text-xs font-medium 
+text-muted-foreground"[39m
+[36m>[39m
+  [0mLiquidAI/LFM2-24B-A2B[0m
+[36m</span>[39m
+
+Ignored nodes: comments, script, style
+[36m<p[39m
+  [33mclass[39m=[32m"truncate text-sm font-medium text-foreground"[39m
+[36m>[39m
+  [0mLiquidAI/LFM2-24B-A2B[0m
+[36m</p>[39m
+
+Ignored nodes: comments, script, style
+[36m<p[39m
+  [33mclass[39m=[32m"truncate text-sm font-medium text-foreground"[39m
+[36m>[39m
+  [0mLiquidAI/LFM2-24B-A2B[0m
+[36m</p>[39m
+
+Ignored nodes: comments, script, style
+[36m<p[39m
+  [33mclass[39m=[32m"truncate text-sm font-medium text-foreground"[39m
+[36m>[39m
+  [0mLiquidAI/LFM2-24B-A2B[0m
+[36m</p>[39m
+
+(If this is intentional, then use the `*AllBy*` variant of the query (like 
+`queryAllByText`, `getAllByText`, or `findAllByText`)).
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"space-y-6"[39m
+    [36m>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"flex items-center gap-3"[39m
+      [36m>[39m
+        [36m<button[39m
+          [33mclass[39m=[32m"inline-flex items-center justify-center 
+whitespace-nowrap text-sm font-medium ring-offset-background transition-all 
+duration-150 focus-visible:outline-none focus-visible:ring-2 
+focus-visible:ring-ring focus-visible:ring-offset-2 
+disabled:pointer-events-none disabled:opacity-50 active:scale-[0.98] 
+hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3"[39m
+        [36m>[39m
+          [36m<svg[39m
+            [33mclass[39m=[32m"lucide lucide-arrow-left mr-1 h-4 w-4"[39m
+            [33mfill[39m=[32m"none"[39m
+            [33mheight[39m=[32m"24"[39m
+            [33mstroke[39m=[32m"currentColor"[39m
+            [33mstroke-linecap[39m=[32m"round"[39m
+            [33mstroke-linejoin[39m=[32m"round"[39m
+            [33mstroke-width[39m=[32m"2"[39m
+            [33mviewBox[39m=[32m"0 0 24 24"[39m
+            [33mwidth[39m=[32m"24"[39m
+            [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+          [36m>[39m
+            [36m<path[39m
+              [33md[39m=[32m"m12 19-7-7 7-7"[39m
+            [36m/>[39m
+            [36m<path[39m
+              [33md[39m=[32m"M19 12H5"[39m
+            [36m/>[39m
+          [36m</svg>[39m
+          [0mresults.list.title[0m
+        [36m</button>[39m
+      [36m</div>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"flex items-start justify-between gap-4"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"mb-6"[39m
+        [36m>[39m
+          [36m<h1[39m
+            [33mclass[39m=[32m"text-2xl font-bold tracking-tight 
+text-foreground"[39m
+          [36m>[39m
+            [0mresults.detail.title[0m
+          [36m</h1>[39m
+          [36m<p[39m
+            [33mclass[39m=[32m"mt-1 text-sm text-muted-foreground"[39m
+          [36m>[39m
+            [0m31/12/2023, 21:00:00[0m
+          [36m</p>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"rounded-lg border border-border bg-card 
+text-card-foreground shadow-xs p-4"[39m
+      [36m>[39m
+        [36m<p[39m
+          [33mclass[39m=[32m"mb-1 text-xs font-semibold uppercase 
+tracking-wider text-muted-foreground"[39m
+        [36m>[39m
+          [0mevaluations.detail.question[0m
+        [36m</p>[39m
+        [36m<p[39m
+          [33mclass[39m=[32m"text-sm leading-relaxed text-foreground"[39m
+        [36m>[39m
+          [0mWhat is the applicable standard of review?[0m
+        [36m</p>[39m
+      [36m</div>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"space-y-6"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"rounded-lg border bg-card text-card-foreground 
+shadow-xs border-primary/30 bg-gradient-to-r from-primary/5 via-primary/10 
+to-primary/5 p-6"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"flex items-start gap-4"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"rounded-xl bg-primary/10 p-3"[39m
+            [36m>[39m
+              [36m<svg[39m
+                [33mclass[39m=[32m"lucide lucide-trophy h-7 w-7 
+text-primary"[39m
+                [33mfill[39m=[32m"none"[39m
+                [33mheight[39m=[32m"24"[39m
+                [33mstroke[39m=[32m"currentColor"[39m
+                [33mstroke-linecap[39m=[32m"round"[39m
+                [33mstroke-linejoin[39m=[32m"round"[39m
+                [33mstroke-width[39m=[32m"2"[39m
+                [33mviewBox[39m=[32m"0 0 24 24"[39m
+                [33mwidth[39m=[32m"24"[39m
+                [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+              [36m>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"M6 9H4.5a2.5 2.5 0 0 1 0-5H6"[39m
+                [36m/>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"M18 9h1.5a2.5 2.5 0 0 0 0-5H18"[39m
+                [36m/>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"M4 22h16"[39m
+                [36m/>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 
+18.75 7 20.24 7 22"[39m
+                [36m/>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"M14 14.66V17c0 .55.47.98.97 1.21C16.15 
+18.75 17 20.24 17 22"[39m
+                [36m/>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"M18 2H6v7a6 6 0 0 0 12 0V2Z"[39m
+                [36m/>[39m
+              [36m</svg>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"flex-1"[39m
+            [36m>[39m
+              [36m<p[39m
+                [33mclass[39m=[32m"mb-1 text-xs font-semibold uppercase 
+tracking-wider text-muted-foreground"[39m
+              [36m>[39m
+                [0mresults.winner.label[0m
+              [36m</p>[39m
+              [36m<p[39m
+                [33mclass[39m=[32m"text-2xl font-bold text-foreground"[39m
+              [36m>[39m
+                [0mLiquidAI/LFM2-24B-A2B[0m
+              [36m</p>[39m
+              [36m<p[39m
+                [33mclass[39m=[32m"mt-1 text-sm text-muted-foreground"[39m
+              [36m>[39m
+                [0m31% share in winning Cluster 0[0m
+              [36m</p>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"text-right"[39m
+            [36m>[39m
+              [36m<p[39m
+                [33mclass[39m=[32m"text-xs font-semibold uppercase 
+tracking-wider text-muted-foreground"[39m
+              [36m>[39m
+                [0mresults.winner.clusterScore[0m
+              [36m</p>[39m
+              [36m<p[39m
+                [33mclass[39m=[32m"text-3xl font-bold text-primary"[39m
+              [36m>[39m
+                [0m85[0m
+                [36m<span[39m
+                  [33mclass[39m=[32m"text-base font-normal 
+text-muted-foreground"[39m
+                [36m>[39m
+                  [0m%[0m
+                [36m</span>[39m
+              [36m</p>[39m
+            [36m</div>[39m
+          [36m</div>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"grid gap-4 sm:grid-cols-3"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"rounded-lg border border-border bg-card 
+text-card-foreground shadow-xs p-4"[39m
+          [36m>[39m
+            [36m<p[39m
+              [33mclass[39m=[32m"mb-1 text-xs font-semibold uppercase 
+tracking-wider text-muted-foreground"[39m
+            [36m>[39m
+              [0mresults.stats.clusters[0m
+            [36m<...
+
+Ignored nodes: comments, script, style
+[36m<html>[39m
+  [36m<head />[39m
+  [36m<body>[39m
+    [36m<div>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"space-y-6"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center gap-3"[39m
+        [36m>[39m
+          [36m<button[39m
+            [33mclass[39m=[32m"inline-flex items-center justify-center 
+whitespace-nowrap text-sm font-medium ring-offset-background transition-all 
+duration-150 focus-visible:outline-none focus-visible:ring-2 
+focus-visible:ring-ring focus-visible:ring-offset-2 
+disabled:pointer-events-none disabled:opacity-50 active:scale-[0.98] 
+hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3"[39m
+          [36m>[39m
+            [36m<svg[39m
+              [33mclass[39m=[32m"lucide lucide-arrow-left mr-1 h-4 w-4"[39m
+              [33mfill[39m=[32m"none"[39m
+              [33mheight[39m=[32m"24"[39m
+              [33mstroke[39m=[32m"currentColor"[39m
+              [33mstroke-linecap[39m=[32m"round"[39m
+              [33mstroke-linejoin[39m=[32m"round"[39m
+              [33mstroke-width[39m=[32m"2"[39m
+              [33mviewBox[39m=[32m"0 0 24 24"[39m
+              [33mwidth[39m=[32m"24"[39m
+              [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+            [36m>[39m
+              [36m<path[39m
+                [33md[39m=[32m"m12 19-7-7 7-7"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M19 12H5"[39m
+              [36m/>[39m
+            [36m</svg>[39m
+            [0mresults.list.title[0m
+          [36m</button>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-start justify-between gap-4"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"mb-6"[39m
+          [36m>[39m
+            [36m<h1[39m
+              [33mclass[39m=[32m"text-2xl font-bold tracking-tight 
+text-foreground"[39m
+            [36m>[39m
+              [0mresults.detail.title[0m
+            [36m</h1>[39m
+            [36m<p[39m
+              [33mclass[39m=[32m"mt-1 text-sm text-muted-foreground"[39m
+            [36m>[39m
+              [0m31/12/2023, 21:00:00[0m
+            [36m</p>[39m
+          [36m</div>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"rounded-lg border border-border bg-card 
+text-card-foreground shadow-xs p-4"[39m
+        [36m>[39m
+          [36m<p[39m
+            [33mclass[39m=[32m"mb-1 text-xs font-semibold uppercase 
+tracking-wider text-muted-foreground"[39m
+          [36m>[39m
+            [0mevaluations.detail.question[0m
+          [36m</p>[39m
+          [36m<p[39m
+            [33mclass[39m=[32m"text-sm leading-relaxed text-foreground"[39m
+          [36m>[39m
+            [0mWhat is the applicable standard of review?[0m
+          [36m</p>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"space-y-6"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"rounded-lg border bg-card 
+text-card-foreground shadow-xs border-primary/30 bg-gradient-to-r 
+from-primary/5 via-primary/10 to-primary/5 p-6"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"flex items-start gap-4"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"rounded-xl bg-primary/10 p-3"[39m
+              [36m>[39m
+                [36m<svg[39m
+                  [33mclass[39m=[32m"lucide lucide-trophy h-7 w-7 
+text-primary"[39m
+                  [33mfill[39m=[32m"none"[39m
+                  [33mheight[39m=[32m"24"[39m
+                  [33mstroke[39m=[32m"currentColor"[39m
+                  [33mstroke-linecap[39m=[32m"round"[39m
+                  [33mstroke-linejoin[39m=[32m"round"[39m
+                  [33mstroke-width[39m=[32m"2"[39m
+                  [33mviewBox[39m=[32m"0 0 24 24"[39m
+                  [33mwidth[39m=[32m"24"[39m
+                  [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+                [36m>[39m
+                  [36m<path[39m
+                    [33md[39m=[32m"M6 9H4.5a2.5 2.5 0 0 1 0-5H6"[39m
+                  [36m/>[39m
+                  [36m<path[39m
+                    [33md[39m=[32m"M18 9h1.5a2.5 2.5 0 0 0 0-5H18"[39m
+                  [36m/>[39m
+                  [36m<path[39m
+                    [33md[39m=[32m"M4 22h16"[39m
+                  [36m/>[39m
+                  [36m<path[39m
+                    [33md[39m=[32m"M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 
+18.75 7 20.24 7 22"[39m
+                  [36m/>[39m
+                  [36m<path[39m
+                    [33md[39m=[32m"M14 14.66V17c0 .55.47.98.97 1.21C16.15 
+18.75 17 20.24 17 22"[39m
+                  [36m/>[39m
+                  [36m<path[39m
+                    [33md[39m=[32m"M18 2H6v7a6 6 0 0 0 12 0V2Z"[39m
+                  [36m/>[39m
+                [36m</svg>[39m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"flex-1"[39m
+              [36m>[39m
+                [36m<p[39m
+                  [33mclass[39m=[32m"mb-1 text-xs font-semibold uppercase 
+tracking-wider text-muted-foreground"[39m
+                [36m>[39m
+                  [0mresults.winner.label[0m
+                [36m</p>[39m
+                [36m<p[39m
+                  [33mclass[39m=[32m"text-2xl font-bold 
+text-foreground"[39m
+                [36m>[39m
+                  [0mLiquidAI/LFM2-24B-A2B[0m
+                [36m</p>[39m
+                [36m<p[39m
+                  [33mclass[39m=[32m"mt-1 text-sm 
+text-muted-foreground"[39m
+                [36m>[39m
+                  [0m31% share in winning Cluster 0[0m
+                [36m</p>[39m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"text-right"[39m
+              [36m>[39m
+                [36m<p[39m
+                  [33mclass[39m=[32m"text-xs font-semibold uppercase 
+tracking-wider text-muted-foreground"[39m
+                [36m>[39m
+                  [0mresults.winner.clusterScore[0m
+                [36m</p>[39m
+                [36m<p[39m
+                  [33mclass[39m=[32m"text-3xl font-bold text-primary"[39m
+                [36m>[39m
+                  [0m85[0m
+                  [36m<span[39m
+                    [33mclass[39m=[32m"text-base font-normal 
+text-muted-foreground"[39m
+                  [36m>[39m
+                    [0m%[0m
+                  [36m</span>[39m
+                [36m</p>[39m
+              [36m</div>[39m
+            [36m</div>[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"grid gap-4 sm:grid-cols-3"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mcl...
+[90m [2mÔØ»[22m Proxy.waitForWrapper 
+node_modules/@testing-library/dom/dist/wait-for.js:[2m163:27[22m[39m
+[36m [2mÔØ»[22m 
+tests/components/analysis/ResultsPage.test.tsx:[2m193:11[22m[39m
+    [90m191| [39m    vi[33m.[39m[34mmocked[39m(getAnalysis)[33m.[39m[3
+4mmockResolvedValue[39m([33mMOCK_ANALYSIS[39m)[33m;[39m
+    [90m192| [39m    [34mrenderPage[39m()[33m;[39m
+    [90m193| [39m    [35mawait[39m [34mwaitFor[39m(() [33m=>[39m {
+    [90m   | [39m          [31m^[39m
+    [90m194| [39m      [34mexpect[39m(screen[33m.[39m[34mgetByText[39m(
+[32m"LiquidAI/LFM2-24B-A2B"[39m))[33m.[39m[34mtoBeInTheDocum[39mÔÇª
+    [90m195| [39m    })[33m;[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»Ô
+Ä»[2/3]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+tests/components/analysis/ResultsPage.test.tsx[2m > [22mResultsPage[2m > 
+[22mcalls runAnalysis and shows results on Run Analysis click
+[31m[1mTestingLibraryElementError[22m[39m: Found multiple elements with 
+the text: LiquidAI/LFM2-24B-A2B
+
+Here are the matching elements:
+
+Ignored nodes: comments, script, style
+[36m<p[39m
+  [33mclass[39m=[32m"text-2xl font-bold text-foreground"[39m
+[36m>[39m
+  [0mLiquidAI/LFM2-24B-A2B[0m
+[36m</p>[39m
+
+Ignored nodes: comments, script, style
+[36m<span[39m
+  [33mclass[39m=[32m"rounded-full bg-muted px-3 py-1 text-xs font-medium 
+text-muted-foreground"[39m
+[36m>[39m
+  [0mLiquidAI/LFM2-24B-A2B[0m
+[36m</span>[39m
+
+Ignored nodes: comments, script, style
+[36m<p[39m
+  [33mclass[39m=[32m"truncate text-sm font-medium text-foreground"[39m
+[36m>[39m
+  [0mLiquidAI/LFM2-24B-A2B[0m
+[36m</p>[39m
+
+Ignored nodes: comments, script, style
+[36m<p[39m
+  [33mclass[39m=[32m"truncate text-sm font-medium text-foreground"[39m
+[36m>[39m
+  [0mLiquidAI/LFM2-24B-A2B[0m
+[36m</p>[39m
+
+Ignored nodes: comments, script, style
+[36m<p[39m
+  [33mclass[39m=[32m"truncate text-sm font-medium text-foreground"[39m
+[36m>[39m
+  [0mLiquidAI/LFM2-24B-A2B[0m
+[36m</p>[39m
+
+(If this is intentional, then use the `*AllBy*` variant of the query (like 
+`queryAllByText`, `getAllByText`, or `findAllByText`)).
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"space-y-6"[39m
+    [36m>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"flex items-center gap-3"[39m
+      [36m>[39m
+        [36m<button[39m
+          [33mclass[39m=[32m"inline-flex items-center justify-center 
+whitespace-nowrap text-sm font-medium ring-offset-background transition-all 
+duration-150 focus-visible:outline-none focus-visible:ring-2 
+focus-visible:ring-ring focus-visible:ring-offset-2 
+disabled:pointer-events-none disabled:opacity-50 active:scale-[0.98] 
+hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3"[39m
+        [36m>[39m
+          [36m<svg[39m
+            [33mclass[39m=[32m"lucide lucide-arrow-left mr-1 h-4 w-4"[39m
+            [33mfill[39m=[32m"none"[39m
+            [33mheight[39m=[32m"24"[39m
+            [33mstroke[39m=[32m"currentColor"[39m
+            [33mstroke-linecap[39m=[32m"round"[39m
+            [33mstroke-linejoin[39m=[32m"round"[39m
+            [33mstroke-width[39m=[32m"2"[39m
+            [33mviewBox[39m=[32m"0 0 24 24"[39m
+            [33mwidth[39m=[32m"24"[39m
+            [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+          [36m>[39m
+            [36m<path[39m
+              [33md[39m=[32m"m12 19-7-7 7-7"[39m
+            [36m/>[39m
+            [36m<path[39m
+              [33md[39m=[32m"M19 12H5"[39m
+            [36m/>[39m
+          [36m</svg>[39m
+          [0mresults.list.title[0m
+        [36m</button>[39m
+      [36m</div>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"flex items-start justify-between gap-4"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"mb-6"[39m
+        [36m>[39m
+          [36m<h1[39m
+            [33mclass[39m=[32m"text-2xl font-bold tracking-tight 
+text-foreground"[39m
+          [36m>[39m
+            [0mresults.detail.title[0m
+          [36m</h1>[39m
+          [36m<p[39m
+            [33mclass[39m=[32m"mt-1 text-sm text-muted-foreground"[39m
+          [36m>[39m
+            [0m31/12/2023, 21:00:00[0m
+          [36m</p>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"rounded-lg border border-border bg-card 
+text-card-foreground shadow-xs p-4"[39m
+      [36m>[39m
+        [36m<p[39m
+          [33mclass[39m=[32m"mb-1 text-xs font-semibold uppercase 
+tracking-wider text-muted-foreground"[39m
+        [36m>[39m
+          [0mevaluations.detail.question[0m
+        [36m</p>[39m
+        [36m<p[39m
+          [33mclass[39m=[32m"text-sm leading-relaxed text-foreground"[39m
+        [36m>[39m
+          [0mWhat is the applicable standard of review?[0m
+        [36m</p>[39m
+      [36m</div>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"space-y-6"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"rounded-lg border bg-card text-card-foreground 
+shadow-xs border-primary/30 bg-gradient-to-r from-primary/5 via-primary/10 
+to-primary/5 p-6"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"flex items-start gap-4"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"rounded-xl bg-primary/10 p-3"[39m
+            [36m>[39m
+              [36m<svg[39m
+                [33mclass[39m=[32m"lucide lucide-trophy h-7 w-7 
+text-primary"[39m
+                [33mfill[39m=[32m"none"[39m
+                [33mheight[39m=[32m"24"[39m
+                [33mstroke[39m=[32m"currentColor"[39m
+                [33mstroke-linecap[39m=[32m"round"[39m
+                [33mstroke-linejoin[39m=[32m"round"[39m
+                [33mstroke-width[39m=[32m"2"[39m
+                [33mviewBox[39m=[32m"0 0 24 24"[39m
+                [33mwidth[39m=[32m"24"[39m
+                [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+              [36m>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"M6 9H4.5a2.5 2.5 0 0 1 0-5H6"[39m
+                [36m/>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"M18 9h1.5a2.5 2.5 0 0 0 0-5H18"[39m
+                [36m/>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"M4 22h16"[39m
+                [36m/>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 
+18.75 7 20.24 7 22"[39m
+                [36m/>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"M14 14.66V17c0 .55.47.98.97 1.21C16.15 
+18.75 17 20.24 17 22"[39m
+                [36m/>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"M18 2H6v7a6 6 0 0 0 12 0V2Z"[39m
+                [36m/>[39m
+              [36m</svg>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"flex-1"[39m
+            [36m>[39m
+              [36m<p[39m
+                [33mclass[39m=[32m"mb-1 text-xs font-semibold uppercase 
+tracking-wider text-muted-foreground"[39m
+              [36m>[39m
+                [0mresults.winner.label[0m
+              [36m</p>[39m
+              [36m<p[39m
+                [33mclass[39m=[32m"text-2xl font-bold text-foreground"[39m
+              [36m>[39m
+                [0mLiquidAI/LFM2-24B-A2B[0m
+              [36m</p>[39m
+              [36m<p[39m
+                [33mclass[39m=[32m"mt-1 text-sm text-muted-foreground"[39m
+              [36m>[39m
+                [0m31% share in winning Cluster 0[0m
+              [36m</p>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"text-right"[39m
+            [36m>[39m
+              [36m<p[39m
+                [33mclass[39m=[32m"text-xs font-semibold uppercase 
+tracking-wider text-muted-foreground"[39m
+              [36m>[39m
+                [0mresults.winner.clusterScore[0m
+              [36m</p>[39m
+              [36m<p[39m
+                [33mclass[39m=[32m"text-3xl font-bold text-primary"[39m
+              [36m>[39m
+                [0m85[0m
+                [36m<span[39m
+                  [33mclass[39m=[32m"text-base font-normal 
+text-muted-foreground"[39m
+                [36m>[39m
+                  [0m%[0m
+                [36m</span>[39m
+              [36m</p>[39m
+            [36m</div>[39m
+          [36m</div>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"grid gap-4 sm:grid-cols-3"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"rounded-lg border border-border bg-card 
+text-card-foreground shadow-xs p-4"[39m
+          [36m>[39m
+            [36m<p[39m
+              [33mclass[39m=[32m"mb-1 text-xs font-semibold uppercase 
+tracking-wider text-muted-foreground"[39m
+            [36m>[39m
+              [0mresults.stats.clusters[0m
+            [36m<...
+
+Ignored nodes: comments, script, style
+[36m<html>[39m
+  [36m<head />[39m
+  [36m<body>[39m
+    [36m<div>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"space-y-6"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center gap-3"[39m
+        [36m>[39m
+          [36m<button[39m
+            [33mclass[39m=[32m"inline-flex items-center justify-center 
+whitespace-nowrap text-sm font-medium ring-offset-background transition-all 
+duration-150 focus-visible:outline-none focus-visible:ring-2 
+focus-visible:ring-ring focus-visible:ring-offset-2 
+disabled:pointer-events-none disabled:opacity-50 active:scale-[0.98] 
+hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3"[39m
+          [36m>[39m
+            [36m<svg[39m
+              [33mclass[39m=[32m"lucide lucide-arrow-left mr-1 h-4 w-4"[39m
+              [33mfill[39m=[32m"none"[39m
+              [33mheight[39m=[32m"24"[39m
+              [33mstroke[39m=[32m"currentColor"[39m
+              [33mstroke-linecap[39m=[32m"round"[39m
+              [33mstroke-linejoin[39m=[32m"round"[39m
+              [33mstroke-width[39m=[32m"2"[39m
+              [33mviewBox[39m=[32m"0 0 24 24"[39m
+              [33mwidth[39m=[32m"24"[39m
+              [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+            [36m>[39m
+              [36m<path[39m
+                [33md[39m=[32m"m12 19-7-7 7-7"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M19 12H5"[39m
+              [36m/>[39m
+            [36m</svg>[39m
+            [0mresults.list.title[0m
+          [36m</button>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-start justify-between gap-4"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"mb-6"[39m
+[2m Test Files [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m7 passed[39m[22m[90m (8)[39m
+[2m      Tests [22m [1m[31m3 failed[39m[22m[2m | [22m[1m[32m58 passed[39m[22m[90m (61)[39m
+[2m   Start at [22m 22:30:32
+[2m   Duration [22m 6.20s[2m (transform 1.03s, setup 1.36s, collect 4.74s, tests 3.90s, environment 8.26s, prepare 1.47s)[22m
+
+          [36m>[39m
+            [36m<h1[39m
+              [33mclass[39m=[32m"text-2xl font-bold tracking-tight 
+text-foreground"[39m
+            [36m>[39m
+              [0mresults.detail.title[0m
+            [36m</h1>[39m
+            [36m<p[39m
+              [33mclass[39m=[32m"mt-1 text-sm text-muted-foreground"[39m
+            [36m>[39m
+              [0m31/12/2023, 21:00:00[0m
+            [36m</p>[39m
+          [36m</div>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"rounded-lg border border-border bg-card 
+text-card-foreground shadow-xs p-4"[39m
+        [36m>[39m
+          [36m<p[39m
+            [33mclass[39m=[32m"mb-1 text-xs font-semibold uppercase 
+tracking-wider text-muted-foreground"[39m
+          [36m>[39m
+            [0mevaluations.detail.question[0m
+          [36m</p>[39m
+          [36m<p[39m
+            [33mclass[39m=[32m"text-sm leading-relaxed text-foreground"[39m
+          [36m>[39m
+            [0mWhat is the applicable standard of review?[0m
+          [36m</p>[39m
+        [36m</div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"space-y-6"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"rounded-lg border bg-card 
+text-card-foreground shadow-xs border-primary/30 bg-gradient-to-r 
+from-primary/5 via-primary/10 to-primary/5 p-6"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"flex items-start gap-4"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"rounded-xl bg-primary/10 p-3"[39m
+              [36m>[39m
+                [36m<svg[39m
+                  [33mclass[39m=[32m"lucide lucide-trophy h-7 w-7 
+text-primary"[39m
+                  [33mfill[39m=[32m"none"[39m
+                  [33mheight[39m=[32m"24"[39m
+                  [33mstroke[39m=[32m"currentColor"[39m
+                  [33mstroke-linecap[39m=[32m"round"[39m
+                  [33mstroke-linejoin[39m=[32m"round"[39m
+                  [33mstroke-width[39m=[32m"2"[39m
+                  [33mviewBox[39m=[32m"0 0 24 24"[39m
+                  [33mwidth[39m=[32m"24"[39m
+                  [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+                [36m>[39m
+                  [36m<path[39m
+                    [33md[39m=[32m"M6 9H4.5a2.5 2.5 0 0 1 0-5H6"[39m
+                  [36m/>[39m
+                  [36m<path[39m
+                    [33md[39m=[32m"M18 9h1.5a2.5 2.5 0 0 0 0-5H18"[39m
+                  [36m/>[39m
+                  [36m<path[39m
+                    [33md[39m=[32m"M4 22h16"[39m
+                  [36m/>[39m
+                  [36m<path[39m
+                    [33md[39m=[32m"M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 
+18.75 7 20.24 7 22"[39m
+                  [36m/>[39m
+                  [36m<path[39m
+                    [33md[39m=[32m"M14 14.66V17c0 .55.47.98.97 1.21C16.15 
+18.75 17 20.24 17 22"[39m
+                  [36m/>[39m
+                  [36m<path[39m
+                    [33md[39m=[32m"M18 2H6v7a6 6 0 0 0 12 0V2Z"[39m
+                  [36m/>[39m
+                [36m</svg>[39m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"flex-1"[39m
+              [36m>[39m
+                [36m<p[39m
+                  [33mclass[39m=[32m"mb-1 text-xs font-semibold uppercase 
+tracking-wider text-muted-foreground"[39m
+                [36m>[39m
+                  [0mresults.winner.label[0m
+                [36m</p>[39m
+                [36m<p[39m
+                  [33mclass[39m=[32m"text-2xl font-bold 
+text-foreground"[39m
+                [36m>[39m
+                  [0mLiquidAI/LFM2-24B-A2B[0m
+                [36m</p>[39m
+                [36m<p[39m
+                  [33mclass[39m=[32m"mt-1 text-sm 
+text-muted-foreground"[39m
+                [36m>[39m
+                  [0m31% share in winning Cluster 0[0m
+                [36m</p>[39m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"text-right"[39m
+              [36m>[39m
+                [36m<p[39m
+                  [33mclass[39m=[32m"text-xs font-semibold uppercase 
+tracking-wider text-muted-foreground"[39m
+                [36m>[39m
+                  [0mresults.winner.clusterScore[0m
+                [36m</p>[39m
+                [36m<p[39m
+                  [33mclass[39m=[32m"text-3xl font-bold text-primary"[39m
+                [36m>[39m
+                  [0m85[0m
+                  [36m<span[39m
+                    [33mclass[39m=[32m"text-base font-normal 
+text-muted-foreground"[39m
+                  [36m>[39m
+                    [0m%[0m
+                  [36m</span>[39m
+                [36m</p>[39m
+              [36m</div>[39m
+            [36m</div>[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"grid gap-4 sm:grid-cols-3"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mcl...
+[90m [2mÔØ»[22m Proxy.waitForWrapper 
+node_modules/@testing-library/dom/dist/wait-for.js:[2m163:27[22m[39m
+[36m [2mÔØ»[22m 
+tests/components/analysis/ResultsPage.test.tsx:[2m213:11[22m[39m
+    [90m211| [39m      [34mexpect[39m(runAnalysis)[33m.[39m[34mtoHaveBee
+nCalledWith[39m([32m"eval-1"[39m)[33m;[39m
+    [90m212| [39m    })[33m;[39m
+    [90m213| [39m    [35mawait[39m [34mwaitFor[39m(() [33m=>[39m {
+    [90m   | [39m          [31m^[39m
+    [90m214| [39m      [34mexpect[39m(screen[33m.[39m[34mgetByText[39m(
+[32m"LiquidAI/LFM2-24B-A2B"[39m))[33m.[39m[34mtoBeInTheDocum[39mÔÇª
+    [90m215| [39m    })[33m;[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»Ô
+Ä»[3/3]ÔÄ»[22m[39m
+
